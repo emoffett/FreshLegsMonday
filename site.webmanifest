@@ -1,12 +1,12 @@
 {
-  "short_name": "",
-  "name": "",
+  "short_name": "CRTools",
+  "name": "CRTools",
   "icons": [{
-    "src": "icon.png",
+    "src": "/img/favicons/android-icon-192x192.png",
     "type": "image/png",
     "sizes": "192x192"
   }],
   "start_url": "/?utm_source=homescreen",
-  "background_color": "#00b920",
-  "theme_color": "#fafafa"
+  "background_color": "#d3d3d3",
+  "theme_color": "#00b920"
 }
