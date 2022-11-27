@@ -1,0 +1,92 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Marathon predictor v2.0</title>
+  <meta property="og:title" content="Marathon predictor v2.0">
+
+  <meta name="description" content="A tool to predict an athletes marathon based on their weekly training">
+  <meta property="og:description" content="A tool to predict an athletes marathon based on their weekly training">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:type" content="website">
+  <!--
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  Place favicon.ico in the root directory -->
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap'>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/predictor.css">
+
+  <meta name="theme-color" content="#00b920">
+</head>
+
+<body>
+  <header>
+    <h1>Race predictor</h1>
+  </header>
+
+  <main>
+    <h1>Race performance predictors</h1>
+
+    <section>
+      <h2>Tanda formula prediction</h2>
+      <div class="large-row">
+        <form class="right">
+          <input type="range" id="weeklyDistanceRange" min="15" max="250" value="100" oninput="crApp.predictor.tandaSlider();"/>
+          <label for="weeklyDistanceRange">weekly distance: <span id="weeklyDistanceSpan"></span></label>
+          <button type="button" class="btn-floating" onmousedown="crApp.predictor.decrementDistance()"
+                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
+          ><</button>
+          <button onmousedown="crApp.predictor.incrementDistance()" type="button" class="btn-floating"
+                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
+          >></button>
+          <input type="range" id="weeklyPaceRange" min="150" max="450" value="300" oninput="crApp.predictor.tandaSlider();"/>
+          <label for="weeklyPaceRange">weekly pace: <span id="weeklyPaceSpan"></span></label>
+          <button onmousedown="crApp.predictor.incrementPace()" type="button" class="btn-floating"
+                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
+          ><</button>
+          <button onmousedown="crApp.predictor.decrementPace()" type="button" class="btn-floating"
+                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
+          >></button>
+        </form>
+        <div id="prediction-text">
+          <span id="tandaPrediction"></span></p>
+          <p>Weekly running time: <span id="weeklyTimeValue"></span></p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Related resources</h2>
+      <p>Get a marathon prediction based on your Strava data using <a href="http://crplots.com/" target="_blank">crplots.com</a></p>
+      <p>Josh Sambrook is a great marathon coach at <a href="https://jset.run" target="_blank">jset.run</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <label for="miles">Units in miles</label>
+      <input type="checkbox" id="miles" value="miles" onchange="crApp.predictor.update();">
+    </div>
+  </footer>
+
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/predictor.js"></script>
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+  <link rel="me" href="https://mstdn.social/@Edd">
+  <link rel="me" href="https://awscommunity.social/@edd">
+</body>
+
+</html>
