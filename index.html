@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Marathon predictor v2.0</title>
-  <meta property="og:title" content="Marathon predictor v2.0">
+  <meta property="og:title" content="CRTools">
 
   <meta name="description" content="A tool to predict an athletes marathon based on their weekly training">
   <meta property="og:description" content="A tool to predict an athletes marathon based on their weekly training">
@@ -15,8 +15,8 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
   -->
-
   <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#00b920">
 
   <link rel="shortcut icon" href="/img/favicons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/img/favicons/favicon.ico" type="image/x-icon">
@@ -31,8 +31,6 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/predictor.css">
-
-  <meta name="theme-color" content="#00b920">
 </head>
 
 <body>
@@ -41,10 +39,9 @@
   </header>
 
   <main>
-    <h1>Race performance predictors</h1>
+    <h1>Tanda Marathon prediction</h1>
 
     <section>
-      <h2>Tanda formula prediction</h2>
       <div class="large-row">
         <form class="right">
           <input type="range" id="weeklyDistanceRange" min="15" max="250" value="100" oninput="crApp.predictor.tandaSlider();"/>
