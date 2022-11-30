@@ -1,3 +1,7 @@
+if ('serviceWorker' in navigator) {
+   navigator.serviceWorker.register("/serviceworker.js");
+}
+
 let crApp = {};
 
 /* Calculate a marathon time prediction from the weekly distance and pace ran based on the Tanda equation */

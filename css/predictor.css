@@ -1,7 +1,7 @@
 /*
 TODO: Review fonts and host
 TODO: Links to footer
-TODO: Add GA
+TODO: Add GA and PWA compatibility
 TODO: Check lighthouse
 TODO: Flash raspberry pi
 TODO: Set up nginx
@@ -12,6 +12,8 @@ TODO: Move units checkbox next to controls (and related resources to footer)
 TODO: Have tanda lines graph on predictor page
 TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
 TODO: Update og:url
+TODO: Refactor everything that might be served into a /src?
+TODO: Cookies and IndexedDB for continuity?
 */
 
 :root {
