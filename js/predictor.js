@@ -11,6 +11,12 @@ crApp.tanda = function(distance, pace) {
   return 42.195 * (17.1 + 140.0 * Math.exp(-0.0053 * distance) + 0.55 * pace);
 }
 
+crApp.junkPace = function (distance, pace) {
+  const speed = 3600/pace;
+  const jdistance = distance/7;
+  return ((1+jdistance)/(1390/(98.5 *(Math.exp(-jdistance*7/189)-Math.exp(-(jdistance+1)*7/189))+1390/speed))-jdistance/speed)*60*60;
+}
+
 /* Pretty print hours, minutes and seconds at a fixed character width */
 crApp.secondsToHms = function(seconds) {
   const h = Math.floor(seconds / 3600);
@@ -21,6 +27,8 @@ crApp.secondsToHms = function(seconds) {
 
 crApp.predictor = function() {
   /* private variables */
+  const tandaPrediction = document.getElementById("tandaPrediction");
+
   const weeklyDistanceRange = document.getElementById("weeklyDistanceRange");
   const weeklyDistanceSpan = document.getElementById("weeklyDistanceSpan");
   let weeklyDistance = weeklyDistanceRange.value; // in km
@@ -29,8 +37,8 @@ crApp.predictor = function() {
   const weeklyPaceSpan = document.getElementById("weeklyPaceSpan");
   let weeklyPace = weeklyPaceRange.value; // in seconds per km
 
-  const tandaPrediction = document.getElementById("tandaPrediction");
   const weeklyTimeValue = document.getElementById("weeklyTimeValue");
+  const junkPaceValue = document.getElementById("junkPaceValue");
 
   const milesCheckbox = document.getElementById("miles");
   let miles = milesCheckbox.checked;
@@ -41,6 +49,8 @@ crApp.predictor = function() {
   let update = function() {
     miles = milesCheckbox.checked;
 
+    tandaPrediction.innerText = crApp.secondsToHms(crApp.tanda(weeklyDistance, weeklyPace));
+
     weeklyDistanceSpan.innerHTML = miles ?
       (weeklyDistance/1.608).toFixed().toString().padStart(3, " ") + "miles" :
       weeklyDistance.toString().padStart(3, " ") + "km";
@@ -49,8 +59,11 @@ crApp.predictor = function() {
       crApp.secondsToHms(weeklyPace * 1.608) + "/mile" :
       crApp.secondsToHms(weeklyPace) + "/km";
 
-    tandaPrediction.innerText = crApp.secondsToHms(crApp.tanda(weeklyDistance, weeklyPace));
     weeklyTimeValue.innerText = crApp.secondsToHms(weeklyDistance * weeklyPace);
+
+    junkPaceValue.innerText = miles ?
+      crApp.secondsToHms(crApp.junkPace(weeklyDistance, weeklyPace) * 1.608) + "/mile" :
+      crApp.secondsToHms(crApp.junkPace(weeklyDistance, weeklyPace)) + "/km";
   }
 
   let tandaSlider = function () {

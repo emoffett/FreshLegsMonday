@@ -63,6 +63,13 @@
         </form>
         <div id="prediction-text">
           <p>Weekly running time: <span id="weeklyTimeValue"></span></p>
+          <p>Junk pace: <span id="junkPaceValue"></span></p>
+          <label class="switch">
+            KM
+            <input type="checkbox" id="miles" value="miles" onchange="crApp.predictor.update();">
+            <span class="slider"></span>
+            Miles
+          </label>
         </div>
       </div>
     </section>
