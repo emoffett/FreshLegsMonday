@@ -8,7 +8,7 @@ let crApp = {};
 crApp.tanda = function(distance, pace) {
   // 'distance' is the distance ran per week over the previous 8 weeks in km
   // 'pace' is the average pace at which this distance was run in seconds per km
-  return 42.2 * (17.1 + 140.0 * Math.exp(-0.0053 * distance) + 0.55 * pace);
+  return 42.195 * (17.1 + 140.0 * Math.exp(-0.0053 * distance) + 0.55 * pace);
 }
 
 /* Pretty print hours, minutes and seconds at a fixed character width */

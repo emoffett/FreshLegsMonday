@@ -1,14 +1,13 @@
 /*
 TODO: Review fonts and host
-TODO: Links to footer
-TODO: Add GA and PWA compatibility
+TODO: Add junk pace
+TODO: Add GA with PWA compatibility
 TODO: Check lighthouse
 TODO: Flash raspberry pi
 TODO: Set up nginx
 TODO: Point emoffett at pi
 TODO: Deploy
 TODO: Keyboard focus sequence - buttons in sequence & highlighted?
-TODO: Move units checkbox next to controls (and related resources to footer)
 TODO: Have tanda lines graph on predictor page
 TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
 TODO: Update og:url
@@ -20,7 +19,7 @@ TODO: Cookies and IndexedDB for continuity?
   --primary-colour: #00b920;
   --primary-contrast-colour: #fefefe;
   --secondary-colour: lightgrey;
-  --secondary-contract-colour: black;
+  --secondary-contrast-colour: black;
   --adjacent-colour-1: #038294;
   --adjacent-colour-2: #8de000;
   --opacity: 100%;
@@ -36,15 +35,6 @@ TODO: Cookies and IndexedDB for continuity?
 
 button { all: unset; }
 
-body {
-  font-family: "Roboto", sans-serif;
-
-  /* Make the body take up the length of the page so that the footer can sit at the bottom */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 h1, h2 { font-weight: normal; }
 
 a:link, a:visited {
@@ -52,54 +42,7 @@ a:link, a:visited {
   color: var(--adjacent-colour-1);
 }
 
-header {
-  background-color: var(--primary-colour);
-  color: var(--primary-contrast-colour);
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
-}
-
-header h1 {
-  font-size: xx-large;
-  margin: 0;
-  padding: 0.375em 0.375em 0.375em 0.75em;
-}
-
-main {
-  /* Make the main contents sit in the centre of the page */
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-
-  /* Allow the main section to take up the length of the page so that the footer can sit at the bottom */
-  margin-bottom: auto;
-}
-
-@media (width > 43em) {
-  main {
-    width: 70%;
-  }
-}
-
-@media (width > 62em) {
-  .large-row {
-    display: flex;
-    flex-direction: row;
-  }
-  #prediction-text {
-    padding-left: 2em;
-    width: 30%;
-  }
-}
-
-#tandaPrediction {
-  font-family: "DSEG7 Classic";
-  font-size: xxx-large;
-}
-
-.right {
-  text-align: right;
-}
-
+/* Sliding ranges */
 input[type=range] {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
@@ -133,16 +76,7 @@ input[type=range]::-moz-range-thumb {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-main label {
-  font-family: "Roboto Mono", monospace;
-  color: var(--secondary-colour);
-  filter: brightness(70%);
-}
-
-#weeklyDistanceSpan { white-space: pre; }
-
-#weeklyPaceRange { direction: rtl; }
-
+/* Floating buttons */
 .btn-floating {
   background-color: var(--primary-colour);
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
@@ -166,12 +100,119 @@ main label {
 
 .btn-floating:hover { opacity: var(--hover-opacity); }
 
+/* Switches */
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.switch {
+}
+
+/* The slider */
+.slider {
+  position: relative;
+  display: inline-block;
+  background-color: var(--secondary-colour);
+  border-radius: 0.5em;
+  height: 0.5em;
+  transition: .2s;
+  vertical-align: middle;
+  -webkit-transition: .2s;
+  width: 2.25em;
+}
+
+.slider:before {
+  background-color: var(--primary-colour);
+  border-radius: 50%;
+  bottom: 0.375em;
+  content: "";
+  display: inline-block;
+  height: 1.25em;
+  position: relative;
+  transition: .2s;
+  width: 1.25em;
+  -webkit-transition: .2s;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1em);
+  transform: translateX(1em);
+}
+
+.slider:hover { opacity: var(--hover-opacity); }
+
+
+.right { text-align: right; }
+
+
+body {
+  font-family: "Roboto", sans-serif;
+
+  /* Make the body take up the length of the page so that the footer can sit at the bottom */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: var(--primary-colour);
+  color: var(--primary-contrast-colour);
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+header h1 {
+  font-size: xx-large;
+  margin: 0;
+  padding: 0.375em 0.375em 0.375em 0.75em;
+}
+
+main {
+  /* Make the main contents sit in the centre of the page */
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Allow the main section to take up the length of the page so that the footer can sit at the bottom */
+  margin-bottom: auto;
+}
+
+@media (width > 43em) {
+  main {
+    width: 70%;
+  }
+}
+
+main label { font-family: "Roboto Mono", monospace;}
+
+@media (width > 62em) {
+  .large-row {
+    display: flex;
+    flex-direction: row;
+  }
+  #prediction-text {
+    padding-left: 2em;
+    width: 30%;
+  }
+}
+
+#tandaPrediction {
+  font-family: "DSEG7 Classic", monospace;
+  font-size: xxx-large;
+}
+
+#weeklyDistanceSpan { white-space: pre; }
+
+#weeklyPaceRange { direction: rtl; }
+
 footer {
   /* Get the footer to sit at the bottom of the page */
   position: relative;
   bottom: 0;
 
-  padding: 0.75em 0em;
   background-color: var(--secondary-colour);
 }
 
@@ -183,7 +224,6 @@ footer {
 
   /* Allow the main section to take up the length of the page so that the footer can sit at the bottom */
   margin-bottom: auto;
-
 }
 
 @media (width > 43em) {
@@ -192,6 +232,5 @@ footer {
   }
 }
 
-footer input[type=checkbox] {
-  accent-color: var(--secondary-contract-colour);
-}
+footer h2 { margin-bottom: 0; }
+footer ul { margin-top: 0; }

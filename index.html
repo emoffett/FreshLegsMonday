@@ -6,8 +6,8 @@
   <title>Marathon predictor v2.0</title>
   <meta property="og:title" content="CRTools">
 
-  <meta name="description" content="A tool to predict an athletes marathon based on their weekly training">
-  <meta property="og:description" content="A tool to predict an athletes marathon based on their weekly training">
+  <meta name="description" content="A tool to predict an athletes marathon performance based on the Tanda formula from their weekly training">
+  <meta property="og:description" content="A tool to predict an athletes marathon performance based on the Tanda formula from their weekly training">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:type" content="website">
@@ -39,7 +39,7 @@
   </header>
 
   <main>
-    <h1>Tanda marathon prediction</h1>
+    <h1>Marathon prediction: <span id="tandaPrediction"></span></h1>
 
     <section>
       <div class="large-row">
@@ -62,23 +62,21 @@
           >></button>
         </form>
         <div id="prediction-text">
-          <span id="tandaPrediction"></span>
           <p>Weekly running time: <span id="weeklyTimeValue"></span></p>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2>Related resources</h2>
-      <p>Get a marathon prediction based on your Strava data using <a href="http://crplots.com/" target="_blank">crplots.com</a></p>
-      <p>Josh Sambrook is a great marathon coach at <a href="https://jset.run" target="_blank">jset.run</a></p>
-    </section>
   </main>
 
   <footer>
     <div class="footer-content">
-      <label for="miles">Units in miles</label>
-      <input type="checkbox" id="miles" value="miles" onchange="crApp.predictor.update();">
+      <h2>Related resources</h2>
+      <ul>
+        <li>Get a marathon prediction based on your Strava data using <a href="http://crplots.com/" target="_blank">crplots.com</a></li>
+        <li>Giovanni Tanda's <a href="https://rua.ua.es/dspace/bitstream/10045/18930/1/jhse_Vol_VI_N_III_511-520.pdf" target="_blank" rel="noopener">research</a> on which the marathon prediction above is based</li>
+        <li>Josh Sambrook at <a href="https://jset.run" target="_blank">jset.run</a> can help with your marathon training</li>
+      </ul>
     </div>
   </footer>
 
