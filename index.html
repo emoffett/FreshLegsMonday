@@ -27,7 +27,6 @@
   <link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
 
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap'>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/predictor.css">
@@ -39,13 +38,13 @@
   </header>
 
   <main>
-    <h1>Marathon prediction: <span id="tandaPrediction"></span></h1>
+    <h1><span id="tandaH1">Marathon prediction: </span><span id="tandaPrediction"></span></h1>
 
     <section>
       <div class="large-row">
         <form class="right">
           <input type="range" id="weeklyDistanceRange" min="15" max="250" value="100" oninput="crApp.predictor.tandaSlider();"/>
-          <label for="weeklyDistanceRange">weekly distance: <span id="weeklyDistanceSpan"></span></label>
+          <label for="weeklyDistanceRange">weekly distance: <span id="weeklyDistanceSpan" class="mono"></span></label>
           <button type="button" class="btn-floating" onmousedown="crApp.predictor.decrementDistance()"
                   onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
           ><</button>
@@ -53,7 +52,7 @@
                   onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
           >></button>
           <input type="range" id="weeklyPaceRange" min="150" max="450" value="300" oninput="crApp.predictor.tandaSlider();"/>
-          <label for="weeklyPaceRange">weekly pace: <span id="weeklyPaceSpan"></span></label>
+          <label for="weeklyPaceRange">weekly pace: <span id="weeklyPaceSpan" class="mono"></span></label>
           <button onmousedown="crApp.predictor.incrementPace()" type="button" class="btn-floating"
                   onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
           ><</button>
@@ -62,8 +61,8 @@
           >></button>
         </form>
         <div id="prediction-text">
-          <p>Weekly running time: <span id="weeklyTimeValue"></span></p>
-          <p>Junk pace: <span id="junkPaceValue"></span></p>
+          <p>Weekly running time: <span id="weeklyTimeValue" class="mono"></span></p>
+          <p>Junk pace: <span id="junkPaceValue" class="mono"></span></p>
           <label class="switch">
             KM
             <input type="checkbox" id="miles" value="miles" onchange="crApp.predictor.update();">
@@ -73,7 +72,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>

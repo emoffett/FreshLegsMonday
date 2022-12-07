@@ -3,10 +3,27 @@
 
 // Which resources we want to make available offline at time of installation
 const urlsToCache = [
-  "/",
+  "/index.html",
+
   "/css/normalize.css",
   "/css/main.css",
-  "/css/predictor.css"
+  "/css/predictor.css",
+
+  "/fonts/dseg/DSEG7-Classic-MINI/DSEG7ClassicMini-Regular.woff2",
+  "/fonts/Roboto/Roboto-Regular.ttf",
+  "/fonts/RobotoMono/static/RobotoMono-Regular.ttf",
+
+  "/img/favicons/apple-icon.png",
+  "/img/favicons/apple-icon-76x76.png",
+  "/img/favicons/apple-icon-114x114.png",
+  "/img/favicons/apple-icon-120x120.png",
+  "/img/favicons/apple-icon-180x180.png",
+  "/img/favicons/favicon.ico",
+  "/img/favicons/icon-512x512.png",
+
+  "/js/vendor/modernizr-3.11.2.min.js",
+  "/js/plugins.js",
+  "/js/predictor.js"
 ];
 
 self.addEventListener("install", event => {

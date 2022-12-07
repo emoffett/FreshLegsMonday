@@ -1,17 +1,16 @@
 /*
-TODO: Review fonts and host
 TODO: Add GA with PWA compatibility
 TODO: Check lighthouse
 TODO: Flash raspberry pi
-TODO: Set up nginx
-TODO: Point emoffett at pi
+TODO: Set up nginx/apache
+TODO: Point race predictor @ freshlegsmonday at pi
 TODO: Deploy
-TODO: Keyboard focus sequence - buttons in sequence & highlighted?
 TODO: Have tanda lines graph on predictor page
 TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
 TODO: Update og:url
-TODO: Refactor everything that might be served into a /src?
-TODO: Cookies and IndexedDB for continuity?
+TODO: Refactor everything that might be served into a /src subdirectory?
+TODO: Cookies and/or IndexedDB for continuity?
+TODO: Keyboard focus sequence - buttons in sequence & highlighted?
 */
 
 :root {
@@ -28,6 +27,20 @@ TODO: Cookies and IndexedDB for continuity?
 @font-face {
   font-family: "DSEG7 Classic";
   src: url("../fonts/dseg/DSEG7-Classic-MINI/DSEG7ClassicMini-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../fonts/RobotoMono/static/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -145,9 +158,6 @@ input:checked + .slider:before {
 .slider:hover { opacity: var(--hover-opacity); }
 
 
-.right { text-align: right; }
-
-
 body {
   font-family: "Roboto", sans-serif;
 
@@ -161,12 +171,6 @@ header {
   background-color: var(--primary-colour);
   color: var(--primary-contrast-colour);
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
-}
-
-header h1 {
-  font-size: xx-large;
-  margin: 0;
-  padding: 0.375em 0.375em 0.375em 0.75em;
 }
 
 main {
@@ -185,7 +189,9 @@ main {
   }
 }
 
-main label { font-family: "Roboto Mono", monospace;}
+.right { text-align: right; }
+
+.mono { font-family: "Roboto Mono", monospace; }
 
 @media (width > 62em) {
   .large-row {
@@ -196,6 +202,16 @@ main label { font-family: "Roboto Mono", monospace;}
     padding-left: 2em;
     width: 30%;
   }
+}
+
+header h1 {
+  margin: 0;
+  padding: 0.375em 0.375em 0.375em 0.75em;
+}
+
+#tandaH1 {
+  vertical-align: top;
+  font-size: xx-large;
 }
 
 #tandaPrediction {
@@ -213,6 +229,7 @@ footer {
   bottom: 0;
 
   background-color: var(--secondary-colour);
+  margin-top: 0.75em;
 }
 
 .footer-content {
