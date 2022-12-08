@@ -1,10 +1,9 @@
 /*
-TODO: Add GA with PWA compatibility
-TODO: Check lighthouse
 TODO: Flash raspberry pi
 TODO: Set up nginx/apache
 TODO: Point race predictor @ freshlegsmonday at pi
 TODO: Deploy
+TODO: Add GA with PWA compatibility
 TODO: Have tanda lines graph on predictor page
 TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
 TODO: Update og:url
@@ -26,23 +25,26 @@ TODO: Keyboard focus sequence - buttons in sequence & highlighted?
 
 @font-face {
   font-family: "DSEG7 Classic";
-  src: url("../fonts/dseg/DSEG7-Classic-MINI/DSEG7ClassicMini-Regular.woff2") format("woff2");
+  src:  local("DSEG7 Classic"),  local("DSEG7-Classic"), url("../fonts/dseg/DSEG7-Classic-MINI/DSEG7ClassicMini-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto";
-  src: url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  src:  local(Roboto), url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Roboto Mono";
-  src: url("../fonts/RobotoMono/static/RobotoMono-Regular.ttf") format("truetype");
+  src: local(Roboto Mono), local(Roboto-Mono), url("../fonts/RobotoMono/static/RobotoMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 button { all: unset; }
