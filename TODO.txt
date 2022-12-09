@@ -1,0 +1,16 @@
+TODO: Holding a button down not working on mobile
+TODO: Single refresh required for updated content
+TODO: Don't try to cache GA with the service worker
+TODO: GA PWA compatibility
+TODO: Install the app link
+TODO: Stop logging urls to console in service worker
+TODO: Less bright green
+TODO: Move slider below text
+TODO: Less cramped
+TODO: Replace >< with glyphicons
+TODO: Have tanda lines graph on predictor page
+TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
+TODO: Update og:url
+TODO: Point race predictor @ freshlegsmonday at pi
+TODO: Cookies and/or IndexedDB for continuity?
+TODO: Keyboard focus sequence - buttons in sequence & highlighted?

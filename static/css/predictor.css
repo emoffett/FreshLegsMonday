@@ -1,14 +1,3 @@
-/*
-TODO: Add GA with PWA compatibility
-TODO: Have tanda lines graph on predictor page
-TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
-TODO: Update og:url
-TODO: Point race predictor @ freshlegsmonday at pi
-TODO: Cookies and/or IndexedDB for continuity?
-TODO: Keyboard focus sequence - buttons in sequence & highlighted?
-TODO: Replace <> with glyphicons
-*/
-
 :root {
   --primary-colour: #00b920;
   --primary-contrast-colour: #fefefe;
