@@ -14,5 +14,6 @@
   "display": "fullscreen",
   "scope": "/",
   "description": "Marathon predictor ",
-  "orientation": "any"
+  "orientation": "any",
+  "version": "2.0.1"
 }

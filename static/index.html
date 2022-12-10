@@ -11,10 +11,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:type" content="website">
-  <!--
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-  -->
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#00b920">
 
@@ -43,22 +39,17 @@
     <section>
       <div class="large-row">
         <form class="right">
-          <input type="range" id="weeklyDistanceRange" min="40" max="250" value="100" oninput="crApp.predictor.tandaSlider();"/>
+
+          <input type="range" id="weeklyDistanceRange" min="40" max="250" value="100" class="tandaSlider"/>
           <label for="weeklyDistanceRange">Weekly distance: <span id="weeklyDistanceSpan" class="mono"></span></label>
-          <button type="button" class="btn-floating" onmousedown="crApp.predictor.decrementDistance()"
-                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
-          ><</button>
-          <button onmousedown="crApp.predictor.incrementDistance()" type="button" class="btn-floating"
-                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
-          >></button>
-          <input type="range" id="weeklyPaceRange" min="150" max="450" value="300" oninput="crApp.predictor.tandaSlider();"/>
+          <button type="button" id="decrementDistanceButton" class="btn-slider"><</button>
+          <button type="button" id="incrementDistanceButton" class="btn-slider">></button>
+
+          <input type="range" id="weeklyPaceRange" min="150" max="450" value="300" class="tandaSlider"/>
           <label for="weeklyPaceRange">Weekly pace: <span id="weeklyPaceSpan" class="mono"></span></label>
-          <button onmousedown="crApp.predictor.incrementPace()" type="button" class="btn-floating"
-                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
-          ><</button>
-          <button onmousedown="crApp.predictor.decrementPace()" type="button" class="btn-floating"
-                  onmouseup="crApp.predictor.mouseRelease()" onmouseleave="crApp.predictor.mouseRelease()"
-          >></button>
+          <button type="button" id="incrementPaceButton" class="btn-slider"><</button>
+          <button type="button" id="decrementPaceButton" class="btn-slider">></button>
+
         </form>
         <div id="prediction-text">
           <p>Weekly running time: <span id="weeklyTimeValue" class="mono"></span></p>

@@ -1,3 +1,4 @@
+// Register the PWA (Progressive Web App) service worker
 if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register("/serviceworker.js");
 }
@@ -29,22 +30,30 @@ crApp.predictor = function() {
   /* private variables */
   const tandaPrediction = document.getElementById("tandaPrediction");
 
+  const tandaSliders = document.getElementsByClassName("tandaSlider");
+
   const weeklyDistanceRange = document.getElementById("weeklyDistanceRange");
   const weeklyDistanceSpan = document.getElementById("weeklyDistanceSpan");
+  const decrementDistanceButton = document.getElementById("decrementDistanceButton");
+  const incrementDistanceButton = document.getElementById("incrementDistanceButton");
   let weeklyDistance = weeklyDistanceRange.value; // in km
 
   const weeklyPaceRange = document.getElementById("weeklyPaceRange");
   const weeklyPaceSpan = document.getElementById("weeklyPaceSpan");
+  const incrementPaceButton = document.getElementById("incrementPaceButton");
+  const decrementPaceButton = document.getElementById("decrementPaceButton");
   let weeklyPace = weeklyPaceRange.value; // in seconds per km
 
   const weeklyTimeValue = document.getElementById("weeklyTimeValue");
   const junkPaceValue = document.getElementById("junkPaceValue");
 
+  const sliderButtons = document.getElementsByClassName("btn-slider");
+  let mouseHeld = true;
+  const startEvents = ['touchstart', 'mousedown'];
+  const endEvents = ['touchend', 'touchcancel', 'mouseup', 'mouseleave'];
+
   const milesCheckbox = document.getElementById("miles");
   let miles = milesCheckbox.checked;
-
-  let mouseHeld = true;
-
 
   let update = function() {
     miles = milesCheckbox.checked;
@@ -66,18 +75,7 @@ crApp.predictor = function() {
       crApp.secondsToHms(crApp.junkPace(weeklyDistance, weeklyPace)) + "/km";
   }
 
-  let tandaSlider = function () {
-    weeklyDistance = weeklyDistanceRange.value;
-    weeklyPace = weeklyPaceRange.value;
-    update();
-  }
-
-
-  /* Button functionality: */
-  // stop any mousePressed activity
-  let mouseRelease = function() {mouseHeld = false;}
-
-  // repeatedly make changes at the correct rate while a user holds down a button
+  // Repeatedly update the tanda prediction while a user holds down a button
   let mousePressed = function(step) {
     let nextTime = 0;
     let delay = 100;
@@ -98,47 +96,66 @@ crApp.predictor = function() {
     }, 150);
   }
 
-  let decrementDistance = function() {
-    mousePressed(function() {
+  // Add both mouse and touch events to be
+  function addMultipleEventListeners(element, events, handler) {
+    events.forEach(e => element.addEventListener(e, handler))
+  }
+
+  /* Slider listeners: */
+  for (const slider of tandaSliders) {
+    slider.addEventListener("input", () => {
+      weeklyDistance = weeklyDistanceRange.value;
+      weeklyPace = weeklyPaceRange.value;
+      update();
+    });
+  }
+
+  /* Button listeners: */
+  addMultipleEventListeners(decrementDistanceButton, startEvents, event => {
+    event.preventDefault();
+    mousePressed(function () {
       weeklyDistance--;
       weeklyDistanceRange.value = weeklyDistance;
     });
-  }
+  });
 
-  let incrementDistance = function() {
-    mousePressed(function() {
+  addMultipleEventListeners(incrementDistanceButton, startEvents, event => {
+    event.preventDefault();
+    mousePressed(function () {
       weeklyDistance++;
       weeklyDistanceRange.value = weeklyDistance;
     });
-  }
+  });
 
-  let incrementPace = function() {
-    mousePressed(function() {
+  addMultipleEventListeners(incrementPaceButton, startEvents, event => {
+    event.preventDefault();
+    mousePressed(function () {
       weeklyPace++;
       weeklyPaceRange.value = weeklyPace;
     });
-  }
+  });
 
-  let decrementPace = function() {
-    mousePressed(function() {
+  addMultipleEventListeners(decrementPaceButton, startEvents, event => {
+    event.preventDefault();
+    mousePressed(function () {
       weeklyPace--;
       weeklyPaceRange.value = weeklyPace;
     });
+  });
+
+  for (const button of sliderButtons) {
+    // stop any mousePressed activity when the mouse/touch is lifted/moved off of the button
+    addMultipleEventListeners(button, endEvents, () => mouseHeld = false);
+    // stop the context menu appearing when the button is held down
+    button.addEventListener('contextmenu', (event) => event.preventDefault())
   }
 
-
-  /* Make the following functions available to the webpage once it has loaded */
+  // Parts that should be accessed externally
   return {
     update: update,
-    tandaSlider: tandaSlider,
-    mouseRelease: mouseRelease,
-    decrementDistance: decrementDistance,
-    incrementDistance: incrementDistance,
-    incrementPace: incrementPace,
-    decrementPace: decrementPace
   };
 }();
 
 window.addEventListener("load", () => {
-    crApp.predictor.update();
+  crApp.predictor.update();
 });
