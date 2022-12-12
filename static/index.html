@@ -79,12 +79,15 @@
   <script src="js/plugins.js"></script>
   <script src="js/predictor.js"></script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPK3865J3G"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-TPK3865J3G');
+    /* Select the measurement ID for the different Google Analytics Data Streams for if the
+    site is being used through an installed PWA or a regular browser */
+    const measurementId = window.matchMedia('(display-mode: standalone)').matches ? 'G-CFC6X3QC6J' : 'G-TPK3865J3G';
+    gtag('config', measurementId);
   </script>
 
   <link rel="me" href="https://mstdn.social/@Edd">
