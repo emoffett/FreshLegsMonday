@@ -47,7 +47,6 @@ self.addEventListener("activate", event => {
 // When a request comes into your service worker, there are two things you can do; you can ignore it,
 // which lets it go to the network, or you can respond to it.
 self.addEventListener("fetch", event => {
-  console.log("Request:", event.request);
   const requestUrl = new URL(event.request.url);
   const referrerUrl = new URL(event.request.referrer);
 
