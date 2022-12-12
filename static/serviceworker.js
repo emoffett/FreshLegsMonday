@@ -41,11 +41,18 @@ self.addEventListener("activate", event => {
 });
 
 // Try to find the resource in the cache; if a hit respond with that.
-// Either way update the cache with the latest from the server
+// Either way update the cache with the latest from the server.
+
+// Assumes that we only want to handle GET requests for the app itself
+// When a request comes into your service worker, there are two things you can do; you can ignore it,
+// which lets it go to the network, or you can respond to it.
 self.addEventListener("fetch", event => {
-  console.log("URL requested: ", event.request.url);
-  console.log("event type:", event.request.method);
-  if (event.request.method === "GET") {
+  console.log("Request:", event.request);
+  const requestUrl = new URL(event.request.url);
+  const referrerUrl = new URL(event.request.referrer);
+
+  // don't try to cache Google Analytics stuff, etc
+  if (requestUrl === referrerUrl) {
     event.respondWith(
       caches.match(event.request).then(cachedResponse => {
         const networkFetch = fetch(event.request).then(response => {
@@ -56,8 +63,5 @@ self.addEventListener("fetch", event => {
         return cachedResponse || networkFetch;
       })
     );
-  } else {
-    console.log("non-GET request: ", event.request);
-    event.respondWith(fetch(event.request));
   }
 });
