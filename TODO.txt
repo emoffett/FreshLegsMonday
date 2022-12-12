@@ -1,8 +1,9 @@
 TODO: Single refresh required for updated content
-TODO: Don't try to cache GA with the service worker
-TODO: GA PWA compatibility
-TODO: Install the app link
+TODO: PWA update
+TODO: Don't prevent default on the touch start - maybe return false or similar for oncontextmenue
 TODO: Stop logging urls to console in service worker
+TODO: GA PWA identification
+TODO: Install the app link
 TODO: Less bright green
 TODO: Move slider below text
 TODO: Less cramped
@@ -13,5 +14,5 @@ TODO: Update og:url
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 TODO: Point race predictor @ freshlegsmonday at pi
-TODO: Cookies and/or IndexedDB for continuity?
+TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Keyboard focus sequence - buttons in sequence & highlighted?

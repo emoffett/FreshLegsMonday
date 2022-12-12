@@ -43,15 +43,21 @@ self.addEventListener("activate", event => {
 // Try to find the resource in the cache; if a hit respond with that.
 // Either way update the cache with the latest from the server
 self.addEventListener("fetch", event => {
-  console.log(`URL requested: ${event.request.url}`);
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      const networkFetch = fetch(event.request).then(response => {
-        caches.open("pwa-assets").then(cache => {
-          cache.put(event.request, response.clone()); // might need to handle pushes differently, e.g. for GA https://stackoverflow.com/questions/57905153/serviceworkers-fetch-object-that-was-not-a-response-was-passed-to-respondwit
+  console.log("URL requested: ", event.request.url);
+  console.log("event type:", event.request.method);
+  if (event.request.method === "GET") {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        const networkFetch = fetch(event.request).then(response => {
+          caches.open("pwa-assets").then(cache => {
+            cache.put(event.request, response.clone());
+          });
         });
-      });
-      return cachedResponse || networkFetch;
-    })
-  );
+        return cachedResponse || networkFetch;
+      })
+    );
+  } else {
+    console.log("non-GET request: ", event.request);
+    event.respondWith(fetch(event.request));
+  }
 });
