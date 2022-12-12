@@ -69,14 +69,19 @@ self.addEventListener("fetch", event => {
 
   if (!crossSite) { // don't try to use caching for cross site content, e.g. Google Analytics
     event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        const networkFetch = fetch(event.request).then(response => {
-          caches.open("pwa-assets").then(cache => {
-            cache.put(event.request, response.clone());
+      caches
+        .match(event.request)
+        .then(cachedResponse => {
+          const networkFetch = fetch(event.request)
+            .then(response => {
+              caches
+                .open("pwa-assets")
+                .then(cache => {
+                  cache.put(event.request, response.clone());
+                });
           });
-        });
-        return cachedResponse || networkFetch;
-      })
+          return cachedResponse || networkFetch;
+        })
     );
   }
 });

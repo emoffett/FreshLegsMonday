@@ -1,12 +1,11 @@
-TODO: Update installed PWA
-TODO: Don't prevent default on the touch start - maybe return false or similar for oncontextmenue
-TODO: GA PWA identification
 TODO: Install the app link
 TODO: Less bright green
 TODO: Move slider below text
 TODO: Less cramped
 TODO: Replace <> with glyphicons
 TODO: Have tanda lines graph on predictor page
+TODO: Improve the maskable icon for android, etc
+TODO: Make it installable through the Android Play Store: https://web.dev/using-a-pwa-in-your-android-app/
 TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
 TODO: Update og:url
   <meta property="og:url" content="">
