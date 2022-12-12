@@ -40,18 +40,22 @@ self.addEventListener("activate", event => {
   console.log("Service worker activated");
 });
 
-// Try to find the resource in the cache; if a hit respond with that.
-// Either way update the cache with the latest from the server.
+// Stale While Revalidate: Send a request to the network and in parallel look in the cache
+// If a cache hit respond with that, otherwise wait for the network response
+// Either way, update the cache with the latest from the network.
 
 // Assumes that we only want to handle GET requests for the app itself
 // When a request comes into your service worker, there are two things you can do; you can ignore it,
 // which lets it go to the network, or you can respond to it.
 self.addEventListener("fetch", event => {
-  const requestUrl = new URL(event.request.url);
-  const referrerUrl = new URL(event.request.referrer);
+  let crossSite = false;
+  if (event.request.url && event.request.referrer) {
+    const requestUrl = new URL(event.request.url);
+    const referrerUrl = new URL(event.request.referrer);
+    if (requestUrl.origin !== referrerUrl.origin) crossSite = true;
+  }
 
-  // don't try to cache Google Analytics stuff, etc
-  if (requestUrl === referrerUrl) {
+  if (!crossSite) { // don't try to use caching for cross site content, e.g. Google Analytics
     event.respondWith(
       caches.match(event.request).then(cachedResponse => {
         const networkFetch = fetch(event.request).then(response => {

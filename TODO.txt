@@ -1,5 +1,5 @@
 TODO: Single refresh required for updated content
-TODO: PWA update
+TODO: Update installed PWA
 TODO: Don't prevent default on the touch start - maybe return false or similar for oncontextmenue
 TODO: GA PWA identification
 TODO: Install the app link
