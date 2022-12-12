@@ -13,13 +13,25 @@ const urlsToCache = [
   "/fonts/Roboto/Roboto-Regular.ttf",
   "/fonts/RobotoMono/static/RobotoMono-Regular.ttf",
 
+  "/img/favicons/android-icon-36x36.png",
+  "/img/favicons/android-icon-48x48.png",
+  "/img/favicons/android-icon-72x72.png",
+  "/img/favicons/android-icon-96x96.png",
+  "/img/favicons/android-icon-144x144.png",
+  "/img/favicons/android-icon-192x192.png",
+
   "/img/favicons/apple-icon.png",
   "/img/favicons/apple-icon-76x76.png",
   "/img/favicons/apple-icon-114x114.png",
   "/img/favicons/apple-icon-120x120.png",
   "/img/favicons/apple-icon-180x180.png",
+
   "/img/favicons/favicon.ico",
+  "/img/favicons/favicon-16x16.png",
+  "/img/favicons/favicon-32x32.png",
+  "/img/favicons/favicon-96x96.png",
   "/img/favicons/icon-512x512.png",
+  "/img/favicons/icon-1024x1024.png",
 
   "/js/vendor/modernizr-3.11.2.min.js",
   "/js/plugins.js",
