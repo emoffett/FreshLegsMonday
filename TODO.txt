@@ -1,6 +1,3 @@
-TODO: Move slider below text
-TODO: Left align weekly X text (at least on mobile)
-TODO: Less cramped
 TODO: Replace <> with glyphicons
 TODO: Have tanda lines graph on predictor page
 TODO: Improve the maskable icon for android, etc.

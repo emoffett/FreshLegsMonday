@@ -47,7 +47,7 @@ input[type=range] {
   appearance: none;
   background: var(--secondary-colour);
   height: 0.25em;
-  margin: 1em 0em;
+  margin: 1em 0;
   opacity: var(--opacity); /* Set transparency (for mouse-over effects on hover) */
   outline: none;
   width: 100%;
@@ -106,9 +106,6 @@ input[type=range]::-moz-range-thumb {
   width: 0;
   height: 0;
   position: absolute;
-}
-
-.switch {
 }
 
 /* The slider */
@@ -176,7 +173,19 @@ main {
   }
 }
 
-.right { text-align: right; }
+.right {
+  margin-left: auto;
+}
+
+.slider-controls {
+  display: flex;
+  align-items: center;
+  width: available;
+}
+
+.max-width { width: 100%; }
+
+.slider-space { margin-top: 3em; }
 
 .mono { font-family: "Roboto Mono", monospace; }
 
