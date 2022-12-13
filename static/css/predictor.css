@@ -1,10 +1,9 @@
 :root {
   --primary-colour: #008800;
   --primary-contrast-colour: #fefefe;
-  --secondary-colour: lightgrey;
+  --secondary-colour: #D3D3D3;
   --secondary-contrast-colour: black;
-  --adjacent-colour-1: #038294;
-  --adjacent-colour-2: #8de000;
+  --adjacent-colour: #006666;
   --opacity: 100%;
   --hover-opacity: 70%;
 }
@@ -39,7 +38,7 @@ h1, h2 { font-weight: normal; }
 
 a:link, a:visited {
   text-decoration: none;
-  color: var(--adjacent-colour-1);
+  color: var(--adjacent-colour);
 }
 
 /* Sliding ranges */
