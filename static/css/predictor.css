@@ -239,8 +239,8 @@ footer {
 footer h2 { margin-bottom: 0; }
 footer ul { margin-top: 0; }
 
-@media all and (display-mode: standalone) {
+@media not all and (display-mode: browser) {
   #install-prompt {
-    visibility: hidden;
+    display: none;
   }
 }
