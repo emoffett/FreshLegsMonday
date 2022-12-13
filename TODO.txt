@@ -1,5 +1,4 @@
 TODO: Have tanda lines graph on predictor page
-TODO: Improve the maskable icon for android, etc.
 TODO: Make it installable through the Android Play Store: https://web.dev/using-a-pwa-in-your-android-app/
 TODO: Create an image to represent the webpage and add the URL to og:image https://ogp.me/#structured
 TODO: Update og:url
@@ -8,3 +7,5 @@ TODO: Update og:url
 TODO: Point race predictor @ freshlegsmonday at pi
 TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Keyboard focus sequence - buttons in sequence & highlighted?
+TODO: Chevron alignment slightly low of centre...why...parent button's shadow somehow influencing?
+TODO: Apple support

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="1024"
+   viewBox="0 0 270.92992 270.92992"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="logo-essence.svg"
+   inkscape:export-filename="/home/emoffett/PycharmProjects/crtools/static/img/favicons/essence-512x512.png"
+   inkscape:export-xdpi="48"
+   inkscape:export-ydpi="48"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     units="px"
+     inkscape:snap-page="false"
+     inkscape:object-paths="false"
+     inkscape:lockguides="false"
+     inkscape:zoom="0.64052329"
+     inkscape:cx="655.71386"
+     inkscape:cy="1050.7034"
+     inkscape:window-width="1895"
+     inkscape:window-height="2123"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect3796"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#008800;stroke-width:24;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 91.53344,20.76244 c 32,80 100,128 160,160"
+       id="path2081"
+       inkscape:transform-center-x="-32"
+       inkscape:transform-center-y="-32"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#008800;stroke-width:24;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 59.078438,56.126322 C 91.07844,136.12632 159.07844,184.12632 219.07844,216.12632"
+       id="path2081-3"
+       inkscape:transform-center-x="-32"
+       inkscape:transform-center-y="-32"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#008800;stroke-width:24;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 21.615401,90.066986 c 32,79.999994 99.999999,127.999994 159.999999,159.999994"
+       id="path2081-5"
+       inkscape:transform-center-x="-32"
+       inkscape:transform-center-y="-32"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

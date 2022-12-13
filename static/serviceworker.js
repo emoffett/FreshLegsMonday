@@ -31,6 +31,7 @@ const urlsToCache = [
   "/img/favicons/favicon-32x32.png",
   "/img/favicons/favicon-96x96.png",
   "/img/favicons/icon-512x512.png",
+  "/img/favicons/essence-512x512.png",
   "/img/favicons/icon-1024x1024.png",
 
   "/js/vendor/modernizr-3.11.2.min.js",

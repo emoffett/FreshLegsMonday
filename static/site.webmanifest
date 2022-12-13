@@ -42,6 +42,12 @@
     "src": "/img/favicons/icon-512x512.png",
     "type": "image/png",
     "sizes": "512x512",
+    "purpose": "any"
+  },
+  {
+    "src": "/img/favicons/essence-512x512.png",
+    "type": "image/png",
+    "sizes": "512x512",
     "purpose": "maskable"
   },
   {
@@ -60,5 +66,5 @@
   "description": "Marathon predictor ",
   "categories": ["sport"],
   "orientation": "any",
-  "version": "2.0.2"
+  "version": "2.0.3"
 }
