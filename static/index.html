@@ -12,7 +12,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#00b920">
+  <meta name="theme-color" content="#008800">
 
   <link rel="shortcut icon" href="/img/favicons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/img/favicons/favicon.ico" type="image/x-icon">
@@ -86,8 +86,8 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     /* Select the measurement ID for the different Google Analytics Data Streams for if the
-    site is being used through an installed PWA or a regular browser */
-    const measurementId = window.matchMedia('(display-mode: standalone)').matches ? 'G-CFC6X3QC6J' : 'G-TPK3865J3G';
+    site is being used through a regular browser or an installed PWA */
+    const measurementId = window.matchMedia('(display-mode: browser)').matches ? 'G-TPK3865J3G' : 'G-CFC6X3QC6J';
     gtag('config', measurementId);
   </script>
 
