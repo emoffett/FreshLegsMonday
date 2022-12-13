@@ -29,6 +29,21 @@
 </head>
 
 <body>
+  <!--This svg element contains the inline svg definitions-->
+  <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="chevron-left" viewBox="0 0 24 24">
+        <title>move slider left</title>
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </symbol>
+      <symbol id="chevron-right" viewBox="0 0 24 24">
+        <title>move slider right</title>
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <header>
     <h1>Race predictor</h1>
   </header>
@@ -44,8 +59,12 @@
             <div class="slider-controls slider-space">
               <label for="weeklyDistanceRange">Weekly distance: <span id="weeklyDistanceSpan" class="mono"></span></label>
               <span class="right">
-                <button type="button" id="decrementDistanceButton" class="btn-slider"><</button>
-                <button type="button" id="incrementDistanceButton" class="btn-slider">></button>
+                <button type="button" id="decrementDistanceButton" class="btn-slider">
+                  <svg class="chevron"><use href="#chevron-left"></use></svg>
+                </button>
+                <button type="button" id="incrementDistanceButton" class="btn-slider">
+                  <svg class="chevron"><use href="#chevron-right"></use></svg>
+                </button>
               </span>
             </div>
 
@@ -54,8 +73,12 @@
             <div class="slider-controls slider-space">
               <label for="weeklyPaceRange">Weekly pace: <span id="weeklyPaceSpan" class="mono"></span></label>
               <span class="right">
-                <button type="button" id="incrementPaceButton" class="btn-slider"><</button>
-                <button type="button" id="decrementPaceButton" class="btn-slider">></button>
+                <button type="button" id="incrementPaceButton" class="btn-slider">
+                  <svg class="chevron"><use href="#chevron-left"></use></svg>
+                </button>
+                <button type="button" id="decrementPaceButton" class="btn-slider">
+                  <svg class="chevron"><use href="#chevron-right"></use></svg>
+                </button>
               </span>
             </div>
 

@@ -1,4 +1,3 @@
-TODO: Replace <> with glyphicons
 TODO: Have tanda lines graph on predictor page
 TODO: Improve the maskable icon for android, etc.
 TODO: Make it installable through the Android Play Store: https://web.dev/using-a-pwa-in-your-android-app/

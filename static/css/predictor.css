@@ -99,6 +99,12 @@ input[type=range]::-moz-range-thumb {
 
 .btn-slider:hover { opacity: var(--hover-opacity); }
 
+.chevron {
+  height: 75%;
+  width: 75%;
+  fill: var(--primary-contrast-colour);
+}
+
 /* Switches */
 /* Hide default HTML checkbox */
 .switch input {

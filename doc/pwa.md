@@ -8,3 +8,6 @@ https://www.learnui.design/tools/accessible-color-generator.html
 4. Adjacent colour = #060606 and contrasts adequately with #D3D3D3 for AA Guidelines
 
 Adjacent colours guided by https://paletton.com/#uid=52P0u0kw0llnWt4trpKEygYOhbv
+
+Inline SVG icons are to allow central CSS styling without having to use JS to inject the SVGs.
+The chevrons are from the Material Design Icons set
