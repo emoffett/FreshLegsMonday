@@ -7,5 +7,5 @@ TODO: Update og:url
 TODO: Point race predictor @ freshlegsmonday at pi
 TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Keyboard focus sequence - buttons in sequence & highlighted?
-TODO: Chevron alignment slightly low of centre...why...parent button's shadow somehow influencing?
+TODO: Chevron alignment slightly low of centre...why...parent button's shadow somehow influencing where the 'centre' is?
 TODO: Apple support
