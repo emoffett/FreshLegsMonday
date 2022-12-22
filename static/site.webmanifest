@@ -1,6 +1,16 @@
 {
-  "short_name": "CRTools",
-  "name": "CRTools",
+  "name": "Fresh Legs Monday",
+  "short_name": "Fresh Legs Monday",
+  "start_url": "/index.html",
+  "id": "/index.html",
+  "background_color": "#d3d3d3",
+  "theme_color": "#008800",
+  "display": "fullscreen",
+  "scope": "/",
+  "description": "Marathon predictor",
+  "categories": ["sport"],
+  "orientation": "any",
+  "version": "2.1.1",
   "icons": [
   {
    "src": "/img/favicons/android-icon-36x36.png",
@@ -56,15 +66,5 @@
     "sizes": "1024x1024",
     "purpose": "any"
   }
-  ],
-  "start_url": "/index.html",
-  "id": "/index.html",
-  "background_color": "#d3d3d3",
-  "theme_color": "#008800",
-  "display": "fullscreen",
-  "scope": "/",
-  "description": "Marathon predictor ",
-  "categories": ["sport"],
-  "orientation": "any",
-  "version": "2.0.3"
+  ]
 }

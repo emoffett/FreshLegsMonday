@@ -246,6 +246,11 @@ footer {
   margin-bottom: auto;
 }
 
+#footer-boilerplate {
+  font-size: small;
+  text-align: right;
+}
+
 @media (width > 43em) {
   .footer-content {
     width: 70%;

@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Marathon predictor v2.0</title>
+  <title>Marathon predictor v2.2</title>
   <link rel="manifest" href="site.webmanifest">
-  <meta property="og:title" content="CRTools">
+  <meta property="og:title" content="Marathon predictor v2.1">
 
-  <meta name="description" content="A tool to predict an athletes marathon performance based on the Tanda formula from their weekly training">
-  <meta property="og:description" content="A tool to predict an athletes marathon performance based on the Tanda formula from their weekly training">
+  <meta name="description" content="A tool to predict an athlete's marathon performance from their weekly training based on the Tanda formula">
+  <meta property="og:description" content="A tool to predict an athlete's marathon performance from their weekly training based on the Tanda formula">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:type" content="website">
@@ -105,10 +105,15 @@
     <div class="footer-content">
       <h2>Related resources</h2>
       <ul>
-        <li id="install-prompt">Install the free app by opening the browser menu and selecting 'Install CRTools'</li>
+        <li id="install-prompt">Get the free app by opening the browser menu and selecting 'Install Fresh Legs Monday'</li>
         <li>Analyse your Strava training data at <a href="http://crplots.com/" target="_blank">crplots.com</a></li>
         <li>See Giovanni Tanda's <a href="https://rua.ua.es/dspace/bitstream/10045/18930/1/jhse_Vol_VI_N_III_511-520.pdf" target="_blank" rel="noopener">research</a> on which the marathon prediction above is based</li>
       </ul>
+      <p id="footer-boilerplate">
+        <a href="html/privacy.html">privacy</a>
+        <a href="html/contact.html">contact</a>
+        <a href="html/cookie.html">cookie</a>
+      </p>
     </div>
   </footer>
 
@@ -123,11 +128,9 @@
     gtag('js', new Date());
     /* Select the measurement ID for the different Google Analytics Data Streams for if the
     site is being used through a regular browser or an installed PWA */
-    const measurementId = window.matchMedia('(display-mode: browser)').matches ? 'G-TPK3865J3G' : 'G-CFC6X3QC6J';
+    const measurementId = window.matchMedia('(display-mode: browser)').matches ? 'G-MMGSNR294P' : 'G-BZZDXVYG7Q';
     gtag('config', measurementId);
   </script>
-
-  <link rel="me" href="https://mstdn.social/@Edd">
 </body>
 
 </html>

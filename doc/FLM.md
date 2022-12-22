@@ -1,3 +1,5 @@
+PWA
+
 Chrome will check for PWA manifest updates periodically: [web.dev](https://web.dev/manifest-updates/)
 
 The theme colour meets AAA Guidelines for large/bold text:
