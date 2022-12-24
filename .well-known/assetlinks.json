@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.freshlegsmonday.twa",
+      "sha256_cert_fingerprints":
+        ["E8:5E:7B:7C:CB:9E:D0:88:EC:80:64:EE:ED:6D:B8:FF:D6:9B:4E:56:87:9E:F9:6A:AD:4F:6E:96:C2:8D:B4:61"]
+    }
+  }
+]

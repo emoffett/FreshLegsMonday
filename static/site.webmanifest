@@ -1,6 +1,6 @@
 {
   "name": "Fresh Legs Monday",
-  "short_name": "Fresh Legs Monday",
+  "short_name": "Fresh Legs..",
   "start_url": "/index.html",
   "id": "/index.html",
   "background_color": "#d3d3d3",
@@ -10,7 +10,7 @@
   "description": "Marathon predictor",
   "categories": ["sport"],
   "orientation": "any",
-  "version": "2.1.1",
+  "version": "2.3.0",
   "icons": [
   {
    "src": "/img/favicons/android-icon-36x36.png",

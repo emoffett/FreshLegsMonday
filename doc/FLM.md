@@ -13,3 +13,5 @@ Adjacent colours guided by https://paletton.com/#uid=52P0u0kw0llnWt4trpKEygYOhbv
 
 Inline SVG icons are to allow central CSS styling without having to use JS to inject the SVGs.
 The chevrons are from the Material Design Icons set
+
+To create the Android Play Store app, see Play.md
