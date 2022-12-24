@@ -2,6 +2,7 @@ TODO: Asset link, e.g. using https://play.google.com/store/apps/details?id=dev.c
 TODO: First release through Android Play Store: https://web.dev/using-a-pwa-in-your-android-app/
 TODO: Add link to Play Store listing
 TODO: Enable http/2
+TODO: Fix contrast: /home/emoffett/Pictures/Screenshots/Screenshot from 2022-12-24 12-35-53.png
 TODO: Fix incremental mile adjustments
 TODO: Change mile/km to 2 position slider
 TODO: Add analytics data stream https://analytics.google.com/analytics/web/#/a252411462p346897349/admin/streams/table/

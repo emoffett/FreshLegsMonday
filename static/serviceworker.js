@@ -5,6 +5,12 @@
 const urlsToCache = [
   "/index.html",
 
+  ".well-known/assetlinks.json",
+
+  "/html/contact.html",
+  "/html/cookie.html",
+  "/html/privacy.html",
+
   "/css/normalize.css",
   "/css/main.css",
   "/css/predictor.css",

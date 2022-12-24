@@ -1,0 +1,46 @@
+{
+  "packageId": "com.freshlegsmonday.twa",
+  "host": "freshlegsmonday.com",
+  "name": "Fresh Legs Monday",
+  "launcherName": "Fresh Legs..",
+  "display": "fullscreen",
+  "themeColor": "#008800",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#D3D3D3",
+  "enableNotifications": true,
+  "startUrl": "/index.html",
+  "iconUrl": "https://freshlegsmonday.com/img/favicons/icon-1024x1024.png",
+  "maskableIconUrl": "https://freshlegsmonday.com/img/favicons/essence-512x512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/home/emoffett/AndroidStudioProjects/android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": 2,
+  "appVersionCode": 2,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://freshlegsmonday.com/site.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://freshlegsmonday.com/",
+  "minSdkVersion": 19,
+  "orientation": "any",
+  "fingerprints": [
+    {
+      "value": "E8:5E:7B:7C:CB:9E:D0:88:EC:80:64:EE:ED:6D:B8:FF:D6:9B:4E:56:87:9E:F9:6A:AD:4F:6E:96:C2:8D:B4:61"
+    }
+  ],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "appVersion": 2
+}
