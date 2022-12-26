@@ -1,11 +1,9 @@
-TODO: First release through Android Play Store: https://web.dev/using-a-pwa-in-your-android-app/
 TODO: Add link to Play Store listing
 TODO: Fix incremental mile adjustments
 TODO: Change mile/km to 2 position slider
 TODO: Add analytics data stream https://analytics.google.com/analytics/web/#/a252411462p346897349/admin/streams/table/
 TODO: Have tanda lines graph on predictor page
 TODO: Allow changes via moving the dot on the tanda space graph
-TODO: Check out layout/wrap around on mobile screens / screens with large text sizes
 TODO: Install text conditional on support and button activated by a link/icon there which is conditional on support
   - Firefox seemingly doesn't support PWA installation
   - Probably can only install using Safari on iOS

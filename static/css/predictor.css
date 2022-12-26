@@ -8,6 +8,12 @@
   --hover-opacity: 70%;
 }
 
+@media (width < 25em) {
+  html {
+    font-size: 0.8em;
+  }
+}
+
 @font-face {
   font-family: "DSEG7 Classic";
   src:  local("DSEG7 Classic"),  local("DSEG7-Classic"), url("../fonts/dseg/DSEG7-Classic-MINI/DSEG7ClassicMini-Regular.woff2") format("woff2");

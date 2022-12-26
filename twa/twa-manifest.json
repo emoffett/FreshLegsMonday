@@ -20,7 +20,7 @@
     "alias": "android"
   },
   "appVersionName": 4,
-  "appVersionCode": 4,
+  "appVersionCode": 5,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://freshlegsmonday.com/site.webmanifest",

@@ -46,11 +46,13 @@ Possibly just follow from `https://github.com/GoogleChromeLabs/bubblewrap/tree/m
 
 Push code and resource changes to the web server .
 
+Navigate to `twa/`
+
 `bubblewrap validate --url=https://freshlegsmonday.com`
 
 `bubblewrap merge`
 
-`bubblewrap update --skipVersionUpgrade`
+`bubblewrap update --appVersionName="GIVE IT A NAME"`
 
 From the /twa/ directory, build the TWA using
 
@@ -60,3 +62,5 @@ Upload the .aab bundle to https://play.google.com/console/u/0/developers/
 
 If the SHA256 code has changed, update the `.well-known/assetlinks.json` with the Play Store generated json at the bottom of
 Setup -> App Integrity -> App Signing
+
+Update git with the TWA manifest changes
