@@ -10,7 +10,7 @@
   "description": "Marathon predictor",
   "categories": ["sport"],
   "orientation": "any",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "icons": [
   {
    "src": "/img/favicons/android-icon-36x36.png",

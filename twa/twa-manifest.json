@@ -19,8 +19,8 @@
     "path": "/home/emoffett/AndroidStudioProjects/android.keystore",
     "alias": "android"
   },
-  "appVersionName": 2,
-  "appVersionCode": 2,
+  "appVersionName": 4,
+  "appVersionCode": 4,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://freshlegsmonday.com/site.webmanifest",
@@ -42,5 +42,5 @@
   ],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": 2
+  "appVersion": 4
 }

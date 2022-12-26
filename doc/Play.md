@@ -42,4 +42,21 @@ Setup -> App Integrity -> App Signing
 
 ## Updates
 
-Possibly just follow from `https://github.com/GoogleChromeLabs/bubblewrap/tree/main/packages/cli#setting-up-the-environment onwards?`
+Possibly just follow from `https://github.com/GoogleChromeLabs/bubblewrap/tree/main/packages/cli#update onwards?`
+
+Push code and resource changes to the web server .
+
+`bubblewrap validate --url=https://freshlegsmonday.com`
+
+`bubblewrap merge`
+
+`bubblewrap update --skipVersionUpgrade`
+
+From the /twa/ directory, build the TWA using
+
+`bubblewrap build`
+
+Upload the .aab bundle to https://play.google.com/console/u/0/developers/
+
+If the SHA256 code has changed, update the `.well-known/assetlinks.json` with the Play Store generated json at the bottom of
+Setup -> App Integrity -> App Signing
