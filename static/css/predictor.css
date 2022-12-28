@@ -130,7 +130,7 @@ input[type=range]::-moz-range-thumb {
   transition: .2s;
   vertical-align: middle;
   -webkit-transition: .2s;
-  width: 2.25em;
+  width: 1.75em;
 }
 
 .slider:before {
@@ -147,8 +147,8 @@ input[type=range]::-moz-range-thumb {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(1em);
-  transform: translateX(1em);
+  -webkit-transform: translateX(0.5em);
+  transform: translateX(0.5em);
 }
 
 .slider:hover { opacity: var(--hover-opacity); }
