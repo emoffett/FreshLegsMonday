@@ -5,3 +5,17 @@ node_modules
 dist
 .cache
 .idea
+/twa/.gradle/
+/twa/app-release-bundle.aab
+/twa/app-release-signed.apk
+/twa/app-release-signed.apk.idsig
+/twa/app-release-unsigned-aligned.apk
+/twa/app/
+/twa/build.gradle
+/twa/gradle.properties
+/twa/gradle/
+/twa/gradlew
+/twa/gradlew.bat
+/twa/manifest-checksum.txt
+/twa/settings.gradle
+
