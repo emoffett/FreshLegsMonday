@@ -1,7 +1,7 @@
 # Play Store App
 ## Closed Testing
 
-The Play Store Android App is Trusted Web Activity (TWA) generated using Bubblewrap. The initial bubblewrap command is:
+The Play Store Android App is a Trusted Web Activity (TWA) generated using Bubblewrap. The initial bubblewrap command is:
 
 `bubblewrap init --manifest="https://freshlegsmonday.com/site.webmanifest" --directory="./twa"`
 
