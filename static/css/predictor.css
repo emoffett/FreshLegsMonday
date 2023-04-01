@@ -84,23 +84,20 @@ input[type=range]::-moz-range-thumb {
 /* Floating buttons */
 .btn-slider {
   background-color: var(--primary-colour);
+  border-radius: 50%;
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
   box-sizing: border-box;
-  border-radius: 50%;
   color: var(--primary-contrast-colour);
   display: inline-block;
   font-size: 1.25em;
-  font-weight: bold;
   height: 2em;
   line-height: 2em;
   opacity: var(--opacity); /* Set transparency (for mouse-over effects on hover) */
   position: relative;
   text-align: center;
+  touch-action: manipulation; /* Allow the slider buttons to be hammered without mobile 300ms click delay kicking in */
   user-select: none;
-  vertical-align: center;
   width: 2em;
-  /* Allow the slider buttons to be hammered without mobile 300ms click delay kicking in */
-  touch-action: manipulation;
 }
 
 .btn-slider:hover { opacity: var(--hover-opacity); }
@@ -137,6 +134,7 @@ input[type=range]::-moz-range-thumb {
   background-color: var(--primary-colour);
   border-radius: 50%;
   bottom: 0.375em;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   content: "";
   display: inline-block;
   height: 1.25em;
@@ -235,11 +233,11 @@ header h1 {
 
 footer {
   /* Get the footer to sit at the bottom of the page */
-  position: relative;
-  bottom: 0;
-
   background-color: var(--secondary-colour);
+  bottom: 0;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
   margin-top: 0.75em;
+  position: relative;
 }
 
 .footer-content {
@@ -250,6 +248,10 @@ footer {
 
   /* Allow the main section to take up the length of the page so that the footer can sit at the bottom */
   margin-bottom: auto;
+}
+
+.external-icon {
+  height: 2em;
 }
 
 #footer-boilerplate {
