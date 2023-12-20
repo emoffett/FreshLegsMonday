@@ -1,26 +1,18 @@
-TODO: Fix incremental mile adjustments
- - create a mile/km change function:
- - change sliders to be 1 mile, not 1km per point
- - increments are multiplied by 1.608 in the JS with only displayed values rounded
- - round values to the nearest mile/km when switching miles/km
-TODO: Add lightning screenshot
-TODO: Add link to Shopify
 TODO: Add analytics data stream https://analytics.google.com/analytics/web/#/a252411462p346897349/admin/streams/table/
 TODO: Have tanda lines graph on predictor page
 TODO: Allow changes via moving the dot on the tanda space graph
-TODO: Install text conditional on support and button activated by a link/icon there which is conditional on support
-  - Firefox seemingly doesn't support PWA installation
-  - Probably can only install using Safari on iOS
 TODO: HTTP/2 https://stegard.net/2022/02/enable-http-2-with-apachephp-on-ubuntu/
 TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Pacing table
 TODO: Splits table
 TODO: Add explanation notes, including min/max limits
-TODO: Apple support
-TODO: Keyboard focus sequence - buttons in sequence & highlighted?
-TODO: Chevron alignment slightly low of centre...why...parent button's shadow somehow influencing where the 'centre' is?
+TODO: Install text conditional on support and button activated by a link/icon there which is conditional on support
+  - Firefox seemingly doesn't support PWA installation
+  - Probably can only install using Safari on iOS
+TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
+TODO: Chevron alignment slightly low of centre...why?
+TODO: Change mile/km to be draggable - either 2 position slider which accepts clicks or https://codepen.io/HiddeDeRidder/pen/REYmQB?css-preprocessor=sass
 TODO: Add monochrome icon
  - redo icons in AndroidStudio? - https://dbushell.com/2020/06/01/bubblewrap-twa-pwa-apps-android-studio/
  - redo icons in figma? - https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
-TODO: Change mile/km to be draggable - either 2 position slider which accepts clicks or https://codepen.io/HiddeDeRidder/pen/REYmQB?css-preprocessor=sass
 TODO: Add to f-droid - https://f-droid.org/en/docs/Inclusion_Policy/

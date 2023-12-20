@@ -4,6 +4,7 @@ if ('serviceWorker' in navigator) {
 }
 
 let crApp = {};
+const oneMile = 1.608;
 
 /* Calculate a marathon time prediction from the weekly distance and pace ran based on the Tanda equation */
 crApp.tanda = function(distance, pace) {
@@ -12,7 +13,7 @@ crApp.tanda = function(distance, pace) {
   return 42.195 * (17.1 + 140.0 * Math.exp(-0.0053 * distance) + 0.55 * pace);
 }
 
-crApp.junkPace = function (distance, pace) {
+crApp.junkPace = function (distance, pace) {  // km, seconds
   const speed = 3600/pace;
   const jdistance = distance/7;
   return ((1+jdistance)/(1390/(98.5 *(Math.exp(-jdistance*7/189)-Math.exp(-(jdistance+1)*7/189))+1390/speed))-jdistance/speed)*60*60;
@@ -36,43 +37,63 @@ crApp.predictor = function() {
   const weeklyDistanceSpan = document.getElementById("weeklyDistanceSpan");
   const decrementDistanceButton = document.getElementById("decrementDistanceButton");
   const incrementDistanceButton = document.getElementById("incrementDistanceButton");
-  let weeklyDistance = weeklyDistanceRange.value; // in km
 
   const weeklyPaceRange = document.getElementById("weeklyPaceRange");
   const weeklyPaceSpan = document.getElementById("weeklyPaceSpan");
   const incrementPaceButton = document.getElementById("incrementPaceButton");
   const decrementPaceButton = document.getElementById("decrementPaceButton");
-  let weeklyPace = weeklyPaceRange.value; // in seconds per km
 
   const weeklyTimeValue = document.getElementById("weeklyTimeValue");
   const junkPaceValue = document.getElementById("junkPaceValue");
 
   const sliderButtons = document.getElementsByClassName("btn-slider");
-  let mouseHeld = true;
+  let mouseHeld = false;
   const startEvents = ['touchstart', 'mousedown'];
   const endEvents = ['touchend', 'touchcancel', 'mouseup', 'mouseleave'];
 
   const milesCheckbox = document.getElementById("miles");
   let miles = milesCheckbox.checked;
+  let distanceInKm = miles ? oneMile : 1;
+  let distanceUnit = miles ? "mile" : "km";
+  let distanceUnits = miles ? "miles" : "km";
+  let weeklyDistance = weeklyDistanceRange.value;
+  let weeklyPace = weeklyPaceRange.value;
 
   let update = function() {
-    miles = milesCheckbox.checked;
-
-    tandaPrediction.innerText = crApp.secondsToHms(crApp.tanda(weeklyDistance, weeklyPace));
-
-    weeklyDistanceSpan.innerHTML = miles ?
-      (weeklyDistance/1.608).toFixed().toString().padStart(3, " ") + "miles" :
-      weeklyDistance.toString().padStart(3, " ") + "km";
-
-    weeklyPaceSpan.innerText = miles ?
-      crApp.secondsToHms(weeklyPace * 1.608) + "/mile" :
-      crApp.secondsToHms(weeklyPace) + "/km";
-
+    if (miles !== milesCheckbox.checked) changeUnits();
+    tandaPrediction.innerText = crApp.secondsToHms(crApp.tanda(weeklyDistance*distanceInKm, weeklyPace/distanceInKm));
+    weeklyDistanceSpan.innerHTML = weeklyDistance.toString().padStart(3, " ") + distanceUnits;
+    weeklyPaceSpan.innerText = crApp.secondsToHms(weeklyPace) + "/" + distanceUnit;
     weeklyTimeValue.innerText = crApp.secondsToHms(weeklyDistance * weeklyPace);
+    junkPaceValue.innerText = crApp.secondsToHms(crApp.junkPace(weeklyDistance*distanceInKm, weeklyPace/distanceInKm) * distanceInKm) + "/" + distanceUnit;
+  }
 
-    junkPaceValue.innerText = miles ?
-      crApp.secondsToHms(crApp.junkPace(weeklyDistance, weeklyPace) * 1.608) + "/mile" :
-      crApp.secondsToHms(crApp.junkPace(weeklyDistance, weeklyPace)) + "/km";
+  function changeUnits() {
+    miles = milesCheckbox.checked;
+    distanceInKm = miles ? oneMile : 1;
+    distanceUnit = miles ? "mile" : "km";
+    distanceUnits = miles ? "miles" : "km"
+    /* Note, ordering of min, max and value setting matter to avoid the min/max limits affecting the value before/after
+     it is set */
+    if (miles) {
+      weeklyDistanceRange.min = 25;
+      weeklyDistance = Math.round(weeklyDistanceRange.value / oneMile);
+      weeklyDistanceRange.value = weeklyDistance;
+      weeklyDistanceRange.max = 150;
+      weeklyPaceRange.max = 720;
+      weeklyPace = Math.round(weeklyPaceRange.value * oneMile)
+      weeklyPaceRange.value = weeklyPace;
+      weeklyPaceRange.min = 320;
+    } else {  // km
+      weeklyDistanceRange.max = 240;
+      weeklyDistance = Math.round(weeklyDistanceRange.value * oneMile);
+      weeklyDistanceRange.value = weeklyDistance;
+      weeklyDistanceRange.min = 40;
+      weeklyPaceRange.min = 200;
+      weeklyPace = Math.round(weeklyPaceRange.value / oneMile)
+      weeklyPaceRange.value = weeklyPace;
+      weeklyPaceRange.max = 450;
+    }
   }
 
   // Repeatedly update the tanda prediction while a user holds down a button
@@ -96,7 +117,7 @@ crApp.predictor = function() {
     }, 150);
   }
 
-  // Add both mouse and touch events to be
+  // Add listeners for both mouse and touch events
   function addMultipleEventListeners(element, events, handler) {
     events.forEach(e => element.addEventListener(e, handler))
   }
