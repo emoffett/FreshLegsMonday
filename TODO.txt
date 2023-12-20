@@ -1,4 +1,3 @@
-TODO: Add analytics data stream https://analytics.google.com/analytics/web/#/a252411462p346897349/admin/streams/table/
 TODO: Have tanda lines graph on predictor page
 TODO: Allow changes via moving the dot on the tanda space graph
 TODO: HTTP/2 https://stegard.net/2022/02/enable-http-2-with-apachephp-on-ubuntu/

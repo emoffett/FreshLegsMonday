@@ -62,7 +62,7 @@ crApp.predictor = function() {
   let update = function() {
     if (miles !== milesCheckbox.checked) changeUnits();
     tandaPrediction.innerText = crApp.secondsToHms(crApp.tanda(weeklyDistance*distanceInKm, weeklyPace/distanceInKm));
-    weeklyDistanceSpan.innerHTML = weeklyDistance.toString().padStart(3, " ") + distanceUnits;
+    weeklyDistanceSpan.innerHTML = weeklyDistance + distanceUnits;
     weeklyPaceSpan.innerText = crApp.secondsToHms(weeklyPace) + "/" + distanceUnit;
     weeklyTimeValue.innerText = crApp.secondsToHms(weeklyDistance * weeklyPace);
     junkPaceValue.innerText = crApp.secondsToHms(crApp.junkPace(weeklyDistance*distanceInKm, weeklyPace/distanceInKm) * distanceInKm) + "/" + distanceUnit;
