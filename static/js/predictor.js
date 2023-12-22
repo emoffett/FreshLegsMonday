@@ -66,6 +66,7 @@ crApp.predictor = function() {
     weeklyPaceSpan.innerText = crApp.secondsToHms(weeklyPace) + "/" + distanceUnit;
     weeklyTimeValue.innerText = crApp.secondsToHms(weeklyDistance * weeklyPace);
     junkPaceValue.innerText = crApp.secondsToHms(crApp.junkPace(weeklyDistance*distanceInKm, weeklyPace/distanceInKm) * distanceInKm) + "/" + distanceUnit;
+    crApp.tandaSpace.render();
   }
 
   function changeUnits() {
@@ -177,95 +178,64 @@ crApp.predictor = function() {
   };
 }();
 
-window.addEventListener("load", () => {
-  crApp.predictor.update();
-});
-
 // https://dev.to/ndesmic/graphing-with-web-components-n3d
-class TandaSpace extends HTMLElement {
-  #points = [];
-  #width = 480;  // SVG pixels
-  #height = 240;  // SVG pixels
-  #xmax = 240;  // Weekly distance in km
-  #xmin = 40;  // Weekly distance in km
-  #ymax = 450;  // Pace in s/km
-  #ymin = 200;  // Pace in s/km
-  #step = 1;  // Length between calculations in km
-  #continuous = false;
-  #thickness = 1;
-  #defaultSize = 1;
-  #defaultColor = "#008800"
+crApp.tandaSpace = function () {
+  const tandaSpace = document.getElementById("tandaGraph");
+  const width = tandaSpace.width.baseVal.value;  // SVG pixels
+  const height = tandaSpace.height.baseVal.value;  // SVG pixels
+  let xmax = 240;  // Weekly distance in km
+  let xmin = 40;  // Weekly distance in km
+  let ymax = 450;  // Pace in s/km
+  let ymin = 200;  // Pace in s/km
+  let step = 1;  // Length between calculations in km
+  let thickness = 1;
+  let defaultSize = 1;
+  let defaultColor = "#008800"
 
-  static observedAttributes = ["points", "func", "step", "width", "height", "xmin", "xmax", "ymin", "ymax", "default-shape", "default-size", "default-color", "continuous", "thickness"];
-  constructor() {
-      super();
-      this.bind(this);
-  }
-  bind(element) {
-      element.attachEvents.bind(element);
-  }
-  render() {
-    if(!this.shadowRoot){
-        this.attachShadow({ mode: "open" });
-    }
-    this.innerHTML = "";
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", this.#width);
-    svg.setAttribute("height", this.#height);
-    svg.append(this.background());
-    svg.append(this.guides());
+  function render() {
+    tandaSpace.append(background());
+    tandaSpace.append(guides());
 
-    svg.append(this.tandaPoint(100, 300));
+    tandaSpace.append(tandaPoint(document.getElementById("weeklyDistanceRange").value, document.getElementById("weeklyPaceRange").value));
     for (let time = 2; time <= 7; time += 0.5) {
-      svg.append(this.tandaLine(time * 60 * 60));
+      tandaSpace.append(tandaLine(time * 60 * 60));
     }
 
-    this.shadowRoot.append(svg);
+    this.shadowRoot.append(tandaSpace);
   }
 
-  windowX(v) {  // x is pixels from left
-    v = v - this.#xmin;
-    v = v / (this.#xmax - this.#xmin);
-    v = v * this.#width;
+  function windowX(v) {  // x is pixels from left
+    v = v - xmin;
+    v = v / (xmax - xmin);
+    v = v * width;
     return v;
   }
-  windowY(v) {  // y is pixels from top
-    v = v - this.#ymin;
-    v = v / (this.#ymax - this.#ymin);
-    v = v * this.#height;
+  function windowY(v) {  // y is pixels from top
+    v = v - ymin;
+    v = v / (ymax - ymin);
+    v = v * height;
     return v;
   }
 
-  attachEvents() {
-
-  }
-  connectedCallback() {
-    this.render();
-    this.attachEvents();
-  }
-  attributeChangedCallback(name, oldValue, newValue) {
-    this[hyphenCaseToCamelCase(name)] = newValue;
-  }
-
-  tandaPoint(distance, pace){
+  function tandaPoint(distance, pace){
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx", this.windowX(distance));
-    circle.setAttribute("cy", this.windowY(pace));
+    circle.setAttribute("cx", windowX(distance));
+    circle.setAttribute("cy", windowY(pace));
     circle.setAttribute("r", 5);
-    circle.setAttribute("fill", this.#defaultColor);
+    circle.setAttribute("fill", defaultColor);
     return circle;
   }
 
-  tandaLine(time){
+  function tandaLine(time){
     let points = [];
-    for (let x = this.#xmin; x < this.#xmax; x += this.#step) {
+    for (let x = xmin; x < xmax; x += step) {
       const y = (time/42.195 - 140*Math.exp(-0.0053 * x) - 17.1)/0.55;  // y is pace (s/km), x is distance (km)
-      points.push({x, y, color: this.#defaultColor, size: this.#defaultSize});
+      points.push({x, y, color: defaultColor, size: defaultSize});
     }
 
     points = points.map(p => ({
-      x: this.windowX(p.x),
-      y: this.windowY(p.y),
+      x: windowX(p.x),
+      y: windowY(p.y),
       color: p.color,
       size: p.size,
     }));
@@ -277,31 +247,34 @@ class TandaSpace extends HTMLElement {
     }
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("fill", "none");
-    path.setAttribute("stroke-width", this.#thickness);
-    path.setAttribute("stroke", this.#defaultColor);
+    path.setAttribute("stroke-width", thickness);
+    path.setAttribute("stroke", defaultColor);
     path.setAttribute("d", pathData.join(" "));
     return path;
   }
 
-  guides() {
+  function guides() {
     const guides = document.createElementNS("http://www.w3.org/2000/svg", "path");
     guides.setAttribute("stroke-width", 1.0);
     guides.setAttribute("stroke", "black");
-    guides.setAttribute("d", `M0,${this.#height} H${this.#width} M0,0 V${this.#height}`);
+    guides.setAttribute("d", `M0,${height} H${width} M0,0 V${height}`);
     return guides;
   }
 
-  background(){
+  function background(){
     const background = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    background.setAttribute("width", this.#width);
-    background.setAttribute("height", this.#height);
+    background.setAttribute("width", width);
+    background.setAttribute("height", height);
     background.setAttribute("fill", "white");
     return background;
   }
-}
 
-function hyphenCaseToCamelCase(text) {
-  return text.replace(/-([a-z])/g, g => g[1].toUpperCase());
-}
+  return {
+    render: render,
+  };
+}();
 
-customElements.define("tanda-graph", TandaSpace);
+window.addEventListener("load", () => {
+  crApp.predictor.update();
+});
+

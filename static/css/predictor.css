@@ -210,6 +210,9 @@ main {
     padding-left: 2em;
     width: 30%;
   }
+  #tandaGraph {
+    width: 70%;
+  }
 }
 
 header h1 {
@@ -230,6 +233,10 @@ header h1 {
 #weeklyDistanceSpan { white-space: pre; }
 
 #weeklyPaceRange { direction: rtl; }
+
+#tandaGraph {
+  aspect-ratio: 16/9;
+}
 
 footer {
   /* Get the footer to sit at the bottom of the page */
