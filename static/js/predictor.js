@@ -180,3 +180,128 @@ crApp.predictor = function() {
 window.addEventListener("load", () => {
   crApp.predictor.update();
 });
+
+// https://dev.to/ndesmic/graphing-with-web-components-n3d
+class TandaSpace extends HTMLElement {
+  #points = [];
+  #width = 480;  // SVG pixels
+  #height = 240;  // SVG pixels
+  #xmax = 240;  // Weekly distance in km
+  #xmin = 40;  // Weekly distance in km
+  #ymax = 450;  // Pace in s/km
+  #ymin = 200;  // Pace in s/km
+  #step = 1;  // Length between calculations in km
+  #continuous = false;
+  #thickness = 1;
+  #defaultSize = 1;
+  #defaultColor = "#008800"
+
+  static observedAttributes = ["points", "func", "step", "width", "height", "xmin", "xmax", "ymin", "ymax", "default-shape", "default-size", "default-color", "continuous", "thickness"];
+  constructor() {
+      super();
+      this.bind(this);
+  }
+  bind(element) {
+      element.attachEvents.bind(element);
+  }
+  render() {
+    if(!this.shadowRoot){
+        this.attachShadow({ mode: "open" });
+    }
+    this.innerHTML = "";
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", this.#width);
+    svg.setAttribute("height", this.#height);
+    svg.append(this.background());
+    svg.append(this.guides());
+
+    svg.append(this.tandaPoint(100, 300));
+    for (let time = 2; time <= 7; time += 0.5) {
+      svg.append(this.tandaLine(time * 60 * 60));
+    }
+
+    this.shadowRoot.append(svg);
+  }
+
+  windowX(v) {  // x is pixels from left
+    v = v - this.#xmin;
+    v = v / (this.#xmax - this.#xmin);
+    v = v * this.#width;
+    return v;
+  }
+  windowY(v) {  // y is pixels from top
+    v = v - this.#ymin;
+    v = v / (this.#ymax - this.#ymin);
+    v = v * this.#height;
+    return v;
+  }
+
+  attachEvents() {
+
+  }
+  connectedCallback() {
+    this.render();
+    this.attachEvents();
+  }
+  attributeChangedCallback(name, oldValue, newValue) {
+    this[hyphenCaseToCamelCase(name)] = newValue;
+  }
+
+  tandaPoint(distance, pace){
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", this.windowX(distance));
+    circle.setAttribute("cy", this.windowY(pace));
+    circle.setAttribute("r", 5);
+    circle.setAttribute("fill", this.#defaultColor);
+    return circle;
+  }
+
+  tandaLine(time){
+    let points = [];
+    for (let x = this.#xmin; x < this.#xmax; x += this.#step) {
+      const y = (time/42.195 - 140*Math.exp(-0.0053 * x) - 17.1)/0.55;  // y is pace (s/km), x is distance (km)
+      points.push({x, y, color: this.#defaultColor, size: this.#defaultSize});
+    }
+
+    points = points.map(p => ({
+      x: this.windowX(p.x),
+      y: this.windowY(p.y),
+      color: p.color,
+      size: p.size,
+    }));
+
+    const pathData = ["M"];
+    pathData.push(points[0].x.toFixed(2), points[0].y.toFixed(2));
+    for (let i = 1; i < points.length; i++) {
+        pathData.push("L", points[i].x.toFixed(2), points[i].y.toFixed(2));
+    }
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke-width", this.#thickness);
+    path.setAttribute("stroke", this.#defaultColor);
+    path.setAttribute("d", pathData.join(" "));
+    return path;
+  }
+
+  guides() {
+    const guides = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    guides.setAttribute("stroke-width", 1.0);
+    guides.setAttribute("stroke", "black");
+    guides.setAttribute("d", `M0,${this.#height} H${this.#width} M0,0 V${this.#height}`);
+    return guides;
+  }
+
+  background(){
+    const background = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    background.setAttribute("width", this.#width);
+    background.setAttribute("height", this.#height);
+    background.setAttribute("fill", "white");
+    return background;
+  }
+}
+
+function hyphenCaseToCamelCase(text) {
+  return text.replace(/-([a-z])/g, g => g[1].toUpperCase());
+}
+
+customElements.define("tanda-graph", TandaSpace);
