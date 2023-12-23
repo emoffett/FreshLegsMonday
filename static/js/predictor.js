@@ -6,14 +6,18 @@ if ('serviceWorker' in navigator) {
 let crApp = {};
 const oneMile = 1.608;
 
-/* Calculate a marathon time prediction from the weekly distance and pace ran based on the Tanda equation */
 crApp.tanda = function(distance, pace) {
   // 'distance' is the distance ran per week over the previous 8 weeks in km
   // 'pace' is the average pace at which this distance was run in seconds per km
+  // Calculate a marathon time prediction from the weekly distance and pace ran based on the Tanda equation
   return 42.195 * (17.1 + 140.0 * Math.exp(-0.0053 * distance) + 0.55 * pace);
 }
 
-crApp.junkPace = function (distance, pace) {  // km, seconds
+crApp.tandaPace = function (time, distance) {  // seconds, km
+  return (time / 42.195 - 140 * Math.exp(-0.0053 * distance) - 17.1) / 0.55;
+}
+
+crApp.junkPace = function (distance, pace) {  // km, seconds/km
   const speed = 3600/pace;
   const jdistance = distance/7;
   return ((1+jdistance)/(1390/(98.5 *(Math.exp(-jdistance*7/189)-Math.exp(-(jdistance+1)*7/189))+1390/speed))-jdistance/speed)*60*60;
@@ -178,7 +182,6 @@ crApp.predictor = function() {
   };
 }();
 
-// https://dev.to/ndesmic/graphing-with-web-components-n3d
 crApp.tandaSpace = function () {
   const tandaSpace = document.getElementById("tandaGraph");
   const width = tandaSpace.width.baseVal.value;  // SVG pixels
@@ -188,29 +191,22 @@ crApp.tandaSpace = function () {
   let ymax = 450;  // Pace in s/km
   let ymin = 200;  // Pace in s/km
   let step = 1;  // Length between calculations in km
-  let thickness = 1;
-  let defaultSize = 1;
-  let defaultColor = "#008800"
 
   function render() {
-    tandaSpace.append(background());
-    tandaSpace.append(guides());
-
-    tandaSpace.append(tandaPoint(document.getElementById("weeklyDistanceRange").value, document.getElementById("weeklyPaceRange").value));
-    for (let time = 2; time <= 7; time += 0.5) {
-      tandaSpace.append(tandaLine(time * 60 * 60));
-    }
-
-    this.shadowRoot.append(tandaSpace);
+    let newNodes = [];
+    newNodes.push(guides());
+    newNodes.push(tandaPoint(document.getElementById("weeklyDistanceRange").value, document.getElementById("weeklyPaceRange").value));
+    newNodes.push(tandaLines());
+    tandaSpace.replaceChildren(...newNodes);
   }
 
-  function windowX(v) {  // x is pixels from left
+  function windowX(v) {
     v = v - xmin;
     v = v / (xmax - xmin);
     v = v * width;
     return v;
   }
-  function windowY(v) {  // y is pixels from top
+  function windowY(v) {
     v = v - ymin;
     v = v / (ymax - ymin);
     v = v * height;
@@ -219,54 +215,75 @@ crApp.tandaSpace = function () {
 
   function tandaPoint(distance, pace){
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("class", "tanda-point");
     circle.setAttribute("cx", windowX(distance));
     circle.setAttribute("cy", windowY(pace));
-    circle.setAttribute("r", 5);
-    circle.setAttribute("fill", defaultColor);
+    circle.setAttribute("r", "5");
     return circle;
   }
 
-  function tandaLine(time){
-    let points = [];
-    for (let x = xmin; x < xmax; x += step) {
-      const y = (time/42.195 - 140*Math.exp(-0.0053 * x) - 17.1)/0.55;  // y is pace (s/km), x is distance (km)
-      points.push({x, y, color: defaultColor, size: defaultSize});
-    }
+  function tandaLines(){
+    const lines = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    for (let t = 2; t <= 7; t += 0.5) {
+      const time = t * 60 * 60;
 
-    points = points.map(p => ({
-      x: windowX(p.x),
-      y: windowY(p.y),
-      color: p.color,
-      size: p.size,
-    }));
+      let points = [];
+      for (let x = xmin; x < xmax; x += step) {
+        const y = crApp.tandaPace(time, x);
+        points.push({x, y});
+      }
 
-    const pathData = ["M"];
-    pathData.push(points[0].x.toFixed(2), points[0].y.toFixed(2));
-    for (let i = 1; i < points.length; i++) {
+      points = points.map(p => ({
+        x: windowX(p.x),
+        y: windowY(p.y),
+      }));
+
+      const pathData = ["M"];
+      pathData.push(points[0].x.toFixed(2), points[0].y.toFixed(2));
+      for (let i = 1; i < points.length; i++) {
         pathData.push("L", points[i].x.toFixed(2), points[i].y.toFixed(2));
+      }
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("class", "tanda-line");
+      path.setAttribute("d", pathData.join(" "));
+      lines.append(path);
+
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("class", "tanda-label");
+      label.setAttribute("y", `${windowY(crApp.tandaPace(time, xmax)) + 12}`);
+      label.setAttribute("x", `${windowX(xmax)}`)
+      label.textContent = crApp.secondsToHms(time);
+      lines.append(label);
     }
-    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("fill", "none");
-    path.setAttribute("stroke-width", thickness);
-    path.setAttribute("stroke", defaultColor);
-    path.setAttribute("d", pathData.join(" "));
-    return path;
+    return lines;
   }
 
   function guides() {
-    const guides = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    guides.setAttribute("stroke-width", 1.0);
-    guides.setAttribute("stroke", "black");
-    guides.setAttribute("d", `M0,${height} H${width} M0,0 V${height}`);
+    const guides = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    for (let p = Math.ceil((ymin+1)/60)*60; p < ymax; p += 60) {
+      const guide = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      guide.setAttribute("class", "guide");
+      guide.setAttribute("d", `M0,${windowY(p)} H${width}`);
+      guides.append(guide);
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("class", "guide-label");
+      label.setAttribute("y", `${windowY(p) - 2}`);  // The "-2" puts the label above the guide
+      label.textContent = crApp.secondsToHms(p) + "/km";
+      guides.append(label);
+    }
+    for (let d = Math.ceil((xmin+1)/50)*50; d < xmax; d += 50) {
+      const guide = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      guide.setAttribute("class", "guide");
+      guide.setAttribute("d", `M${windowX(d)},0 V${height}`);
+      guides.append(guide);
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("class", "guide-label");
+      label.setAttribute("y", `${windowY(ymax) - 2}`);
+      label.setAttribute("x", `${windowX(d) + 1}`);
+      label.textContent = d + "km";
+      guides.append(label);
+    }
     return guides;
-  }
-
-  function background(){
-    const background = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    background.setAttribute("width", width);
-    background.setAttribute("height", height);
-    background.setAttribute("fill", "white");
-    return background;
   }
 
   return {

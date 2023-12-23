@@ -236,6 +236,33 @@ header h1 {
 
 #tandaGraph {
   aspect-ratio: 16/9;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.guide {
+  stroke: var(--secondary-colour);
+  stroke-width: 2;
+}
+
+.guide-label {
+  fill: var(--secondary-colour);
+  font-size: 0.7em;
+}
+
+.tanda-point {
+  fill: var(--primary-colour);
+}
+
+.tanda-line {
+  stroke: var(--primary-colour);
+  fill: none;
+}
+
+.tanda-label {
+  fill: var(--primary-colour);
+  font-size: 0.75em;
+  text-anchor: end;
 }
 
 footer {
