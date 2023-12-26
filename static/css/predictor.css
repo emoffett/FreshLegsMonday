@@ -220,6 +220,13 @@ header h1 {
   padding: 0.375em 0.375em 0.375em 0.75em;
 }
 
+main h1 {
+  position: sticky;
+  top: 10px;
+  background-color: white;
+  z-index: 1;
+}
+
 #tandaH1 {
   vertical-align: top;
   font-size: xx-large;
