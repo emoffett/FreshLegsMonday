@@ -3,24 +3,43 @@ if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register("/serviceworker.js");
 }
 
-let crApp = {};
-const oneMile = 1.608;
+function DistanceUnit(inKm, unit, units, weeklyShortest, weeklyFurthest, fastest, slowest) {
+  this.inKM = inKm;
+  this.unit = unit;
+  this.units = units;
+  this.weeklyShortest = weeklyShortest;
+  this.weeklyFurthest = weeklyFurthest;
+  this.fastest = fastest;
+  this.slowest = slowest;
+}
+
+const km = new DistanceUnit(1, "km", "km", 40, 240, 200, 450);
+const mile = new DistanceUnit(1.608, "mile", "miles", 25, 150, 320, 720);
+
+let crApp = {
+  distanceUnit: km,
+  weeklyDistance: 160,
+  weeklyPace: 300,
+};
 
 crApp.tanda = function(distance, pace) {
   // 'distance' is the distance ran per week over the previous 8 weeks in km
   // 'pace' is the average pace at which this distance was run in seconds per km
-  // Calculate a marathon time prediction from the weekly distance and pace ran based on the Tanda equation
+  // Calculate a marathon time prediction in seconds from the weekly distance and pace ran based on the Tanda equation
   return 42.195 * (17.1 + 140.0 * Math.exp(-0.0053 * distance) + 0.55 * pace);
 }
 
-crApp.tandaPace = function (time, distance) {  // seconds, km
+crApp.tandaPace = function (time, distance) {
+  // 'time' in seconds for a marathon
+  // 'distance' is the distance ran per week over the previous 8 weeks in km
+  // Calculate how fast to run in seconds/km based on the Tanda equation
   return (time / 42.195 - 140 * Math.exp(-0.0053 * distance) - 17.1) / 0.55;
 }
 
 crApp.junkPace = function (distance, pace) {  // km, seconds/km
   const speed = 3600/pace;
-  const jdistance = distance/7;
-  return ((1+jdistance)/(1390/(98.5 *(Math.exp(-jdistance*7/189)-Math.exp(-(jdistance+1)*7/189))+1390/speed))-jdistance/speed)*60*60;
+  const dailyKm = distance/7;
+  return ((1+dailyKm)/(1390/(98.5 *(Math.exp(-dailyKm*7/189)-Math.exp(-(dailyKm+1)*7/189))+1390/speed))-dailyKm/speed)*60*60;
 }
 
 /* Pretty print hours, minutes and seconds at a fixed character width */
@@ -51,54 +70,46 @@ crApp.predictor = function() {
   const junkPaceValue = document.getElementById("junkPaceValue");
 
   const sliderButtons = document.getElementsByClassName("btn-slider");
-  let mouseHeld = false;
   const startEvents = ['touchstart', 'mousedown'];
   const endEvents = ['touchend', 'touchcancel', 'mouseup', 'mouseleave'];
 
   const milesCheckbox = document.getElementById("miles");
-  let miles = milesCheckbox.checked;
-  let distanceInKm = miles ? oneMile : 1;
-  let distanceUnit = miles ? "mile" : "km";
-  let distanceUnits = miles ? "miles" : "km";
-  let weeklyDistance = weeklyDistanceRange.value;
-  let weeklyPace = weeklyPaceRange.value;
+
+  let mouseHeld = false;
 
   let update = function() {
-    if (miles !== milesCheckbox.checked) changeUnits();
-    tandaPrediction.innerText = crApp.secondsToHms(crApp.tanda(weeklyDistance*distanceInKm, weeklyPace/distanceInKm));
-    weeklyDistanceSpan.innerHTML = weeklyDistance + distanceUnits;
-    weeklyPaceSpan.innerText = crApp.secondsToHms(weeklyPace) + "/" + distanceUnit;
-    weeklyTimeValue.innerText = crApp.secondsToHms(weeklyDistance * weeklyPace);
-    junkPaceValue.innerText = crApp.secondsToHms(crApp.junkPace(weeklyDistance*distanceInKm, weeklyPace/distanceInKm) * distanceInKm) + "/" + distanceUnit;
+    if (milesCheckbox.checked !== (crApp.distanceUnit === mile)) {
+      changeUnits(milesCheckbox.checked ? mile : km);
+    }
+
+    tandaPrediction.innerText = crApp.secondsToHms(
+      crApp.tanda(crApp.weeklyDistance*crApp.distanceUnit.inKM, crApp.weeklyPace/crApp.distanceUnit.inKM)
+    );
+    weeklyDistanceSpan.innerHTML = crApp.weeklyDistance + crApp.distanceUnit.units;
+    weeklyPaceSpan.innerText = crApp.secondsToHms(crApp.weeklyPace) + "/" + crApp.distanceUnit.unit;
+    weeklyTimeValue.innerText = crApp.secondsToHms(crApp.weeklyDistance * crApp.weeklyPace);
+    junkPaceValue.innerText = crApp.secondsToHms(
+      crApp.junkPace(crApp.weeklyDistance*crApp.distanceUnit.inKM, crApp.weeklyPace/crApp.distanceUnit.inKM)
+      * crApp.distanceUnit.inKM
+    ) + "/" + crApp.distanceUnit.unit;
     crApp.tandaSpace.render();
   }
 
-  function changeUnits() {
-    miles = milesCheckbox.checked;
-    distanceInKm = miles ? oneMile : 1;
-    distanceUnit = miles ? "mile" : "km";
-    distanceUnits = miles ? "miles" : "km"
+  function changeUnits(newUnit) {
+    const oldUnit = crApp.distanceUnit;
+    const newDistance = Math.round(crApp.weeklyDistance * oldUnit.inKM / newUnit.inKM);
+    const newPace = Math.round(crApp.weeklyPace / oldUnit.inKM * newUnit.inKM);
     /* Note, ordering of min, max and value setting matter to avoid the min/max limits affecting the value before/after
      it is set */
-    if (miles) {
-      weeklyDistanceRange.min = 25;
-      weeklyDistance = Math.round(weeklyDistanceRange.value / oneMile);
-      weeklyDistanceRange.value = weeklyDistance;
-      weeklyDistanceRange.max = 150;
-      weeklyPaceRange.max = 720;
-      weeklyPace = Math.round(weeklyPaceRange.value * oneMile)
-      weeklyPaceRange.value = weeklyPace;
-      weeklyPaceRange.min = 320;
-    } else {  // km
-      weeklyDistanceRange.max = 240;
-      weeklyDistance = Math.round(weeklyDistanceRange.value * oneMile);
-      weeklyDistanceRange.value = weeklyDistance;
-      weeklyDistanceRange.min = 40;
-      weeklyPaceRange.min = 200;
-      weeklyPace = Math.round(weeklyPaceRange.value / oneMile)
-      weeklyPaceRange.value = weeklyPace;
-      weeklyPaceRange.max = 450;
-    }
+    weeklyDistanceRange.min = newUnit.weeklyShortest;
+    weeklyDistanceRange.max = newUnit.weeklyFurthest;
+    weeklyPaceRange.max = newUnit.slowest;
+    weeklyPaceRange.min = newUnit.fastest;
+    crApp.weeklyDistance = newDistance;
+    weeklyDistanceRange.value = crApp.weeklyDistance;
+    crApp.weeklyPace = newPace;
+    weeklyPaceRange.value = crApp.weeklyPace;
+    crApp.distanceUnit = newUnit;
   }
 
   // Repeatedly update the tanda prediction while a user holds down a button
@@ -130,8 +141,8 @@ crApp.predictor = function() {
   /* Slider listeners: */
   for (const slider of tandaSliders) {
     slider.addEventListener("input", () => {
-      weeklyDistance = weeklyDistanceRange.value;
-      weeklyPace = weeklyPaceRange.value;
+      crApp.weeklyDistance = weeklyDistanceRange.value;
+      crApp.weeklyPace = weeklyPaceRange.value;
       update();
     });
   }
@@ -140,32 +151,32 @@ crApp.predictor = function() {
   addMultipleEventListeners(decrementDistanceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
-      weeklyDistance--;
-      weeklyDistanceRange.value = weeklyDistance;
+      crApp.weeklyDistance--;
+      weeklyDistanceRange.value = crApp.weeklyDistance;
     });
   });
 
   addMultipleEventListeners(incrementDistanceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
-      weeklyDistance++;
-      weeklyDistanceRange.value = weeklyDistance;
+      crApp.weeklyDistance++;
+      weeklyDistanceRange.value = crApp.weeklyDistance;
     });
   });
 
   addMultipleEventListeners(incrementPaceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
-      weeklyPace++;
-      weeklyPaceRange.value = weeklyPace;
+      crApp.weeklyPace++;
+      weeklyPaceRange.value = crApp.weeklyPace;
     });
   });
 
   addMultipleEventListeners(decrementPaceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
-      weeklyPace--;
-      weeklyPaceRange.value = weeklyPace;
+      crApp.weeklyPace--;
+      weeklyPaceRange.value = crApp.weeklyPace;
     });
   });
 
@@ -186,29 +197,25 @@ crApp.tandaSpace = function () {
   const tandaSpace = document.getElementById("tandaGraph");
   const width = tandaSpace.width.baseVal.value;  // SVG pixels
   const height = tandaSpace.height.baseVal.value;  // SVG pixels
-  let xmax = 240;  // Weekly distance in km
-  let xmin = 40;  // Weekly distance in km
-  let ymax = 450;  // Pace in s/km
-  let ymin = 200;  // Pace in s/km
-  let step = 1;  // Length between calculations in km
+  const step = 1;  // Length between calculations in distance units
 
   function render() {
     let newNodes = [];
     newNodes.push(guides());
-    newNodes.push(tandaPoint(document.getElementById("weeklyDistanceRange").value, document.getElementById("weeklyPaceRange").value));
+    newNodes.push(tandaPoint(crApp.weeklyDistance, crApp.weeklyPace));
     newNodes.push(tandaLines());
     tandaSpace.replaceChildren(...newNodes);
   }
 
   function windowX(v) {
-    v = v - xmin;
-    v = v / (xmax - xmin);
+    v = v - crApp.distanceUnit.weeklyShortest;
+    v = v / (crApp.distanceUnit.weeklyFurthest - crApp.distanceUnit.weeklyShortest);
     v = v * width;
     return v;
   }
   function windowY(v) {
-    v = v - ymin;
-    v = v / (ymax - ymin);
+    v = v - crApp.distanceUnit.fastest;
+    v = v / (crApp.distanceUnit.slowest - crApp.distanceUnit.fastest);
     v = v * height;
     return v;
   }
@@ -224,12 +231,12 @@ crApp.tandaSpace = function () {
 
   function tandaLines(){
     const lines = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    for (let t = 2; t <= 7; t += 0.5) {
-      const time = t * 60 * 60;
-
+    for (let t = 2; t <= 7; t += 0.5) {  // t is in hours
+      const time = t * 60 * 60;  // time is in seconds
       let points = [];
-      for (let x = xmin; x < xmax; x += step) {
-        const y = crApp.tandaPace(time, x);
+
+      for (let x = crApp.distanceUnit.weeklyShortest; x < crApp.distanceUnit.weeklyFurthest; x += step) {
+        const y = crApp.tandaPace(time, x*crApp.distanceUnit.inKM)*crApp.distanceUnit.inKM;
         points.push({x, y});
       }
 
@@ -250,8 +257,9 @@ crApp.tandaSpace = function () {
 
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("class", "tanda-label");
-      label.setAttribute("y", `${windowY(crApp.tandaPace(time, xmax)) + 12}`);
-      label.setAttribute("x", `${windowX(xmax)}`)
+      const rightAxisCrossing = crApp.tandaPace(time, crApp.distanceUnit.weeklyFurthest*crApp.distanceUnit.inKM)*crApp.distanceUnit.inKM;
+      label.setAttribute("y", `${windowY(rightAxisCrossing) + 12}`);
+      label.setAttribute("x", `${windowX(crApp.distanceUnit.weeklyFurthest)}`)
       label.textContent = crApp.secondsToHms(time);
       lines.append(label);
     }
@@ -260,7 +268,12 @@ crApp.tandaSpace = function () {
 
   function guides() {
     const guides = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    for (let p = Math.ceil((ymin+1)/60)*60; p < ymax; p += 60) {
+    const secondsBetweenGuides = 60;
+    const topGuide = Math.ceil((crApp.distanceUnit.fastest+1)/secondsBetweenGuides)*secondsBetweenGuides;
+    const distanceBetweenGuides = 50;
+    const leftGuide = Math.ceil((crApp.distanceUnit.weeklyShortest+1)/distanceBetweenGuides)*distanceBetweenGuides;
+
+    for (let p = topGuide; p < crApp.distanceUnit.slowest; p += secondsBetweenGuides) {
       const guide = document.createElementNS("http://www.w3.org/2000/svg", "path");
       guide.setAttribute("class", "guide");
       guide.setAttribute("d", `M0,${windowY(p)} H${width}`);
@@ -268,21 +281,23 @@ crApp.tandaSpace = function () {
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("class", "guide-label");
       label.setAttribute("y", `${windowY(p) - 2}`);  // The "-2" puts the label above the guide
-      label.textContent = crApp.secondsToHms(p) + "/km";
+      label.textContent = crApp.secondsToHms(p) + crApp.distanceUnit.unit;
       guides.append(label);
     }
-    for (let d = Math.ceil((xmin+1)/50)*50; d < xmax; d += 50) {
+
+    for (let d = leftGuide; d < crApp.distanceUnit.weeklyFurthest; d += 50) {
       const guide = document.createElementNS("http://www.w3.org/2000/svg", "path");
       guide.setAttribute("class", "guide");
       guide.setAttribute("d", `M${windowX(d)},0 V${height}`);
       guides.append(guide);
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("class", "guide-label");
-      label.setAttribute("y", `${windowY(ymax) - 2}`);
+      label.setAttribute("y", `${windowY(crApp.distanceUnit.slowest) - 2}`);
       label.setAttribute("x", `${windowX(d) + 1}`);
-      label.textContent = d + "km";
+      label.textContent = d + crApp.distanceUnit.unit;
       guides.append(label);
     }
+
     return guides;
   }
 
@@ -294,4 +309,3 @@ crApp.tandaSpace = function () {
 window.addEventListener("load", () => {
   crApp.predictor.update();
 });
-
