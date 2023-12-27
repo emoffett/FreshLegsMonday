@@ -40,7 +40,7 @@
 </head>
 
 <body>
-  <!--This svg element contains the inline svg definitions-->
+  <!--This svg element contains the inline svg definitions for chevrons-->
   <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <symbol id="chevron-left" viewBox="0 0 24 24">
@@ -62,58 +62,54 @@
   <main>
     <h1><span id="tandaH1">Predicted marathon time: </span><span id="tandaPrediction"></span></h1>
 
-    <section>
-      <div class="large-row">
-        <div class="max-width">
-          <form>
+    <div class="large-row">
+      <div class="max-width">
+        <form>
 
-            <div class="slider-controls slider-space">
-              <label for="weeklyDistanceRange">Weekly distance: <span id="weeklyDistanceSpan" class="mono"></span></label>
-              <span class="right">
-                <button type="button" id="decrementDistanceButton" class="btn-slider" aria-label="decrease distance">
-                  <svg class="chevron"><use href="#chevron-left"></use></svg>
-                </button>
-                <button type="button" id="incrementDistanceButton" class="btn-slider" aria-label="increase distance">
-                  <svg class="chevron"><use href="#chevron-right"></use></svg>
-                </button>
-              </span>
-            </div>
+          <div class="slider-controls">
+            <label for="weeklyDistanceRange">Weekly distance: <span id="weeklyDistanceSpan" class="mono"></span></label>
+            <span class="right">
+              <button type="button" id="decrementDistanceButton" class="btn-slider" aria-label="decrease distance">
+                <svg class="chevron"><use href="#chevron-left"></use></svg>
+              </button>
+              <button type="button" id="incrementDistanceButton" class="btn-slider" aria-label="increase distance">
+                <svg class="chevron"><use href="#chevron-right"></use></svg>
+              </button>
+            </span>
+          </div>
 
-            <input type="range" id="weeklyDistanceRange" min="40" max="240" value="160" class="tandaSlider"/>
+          <input type="range" id="weeklyDistanceRange" min="40" max="240" value="160" class="tandaSlider"/>
 
-            <div class="slider-controls slider-space">
-              <label for="weeklyPaceRange">Weekly pace: <span id="weeklyPaceSpan" class="mono"></span></label>
-              <span class="right">
-                <button type="button" id="incrementPaceButton" class="btn-slider" aria-label="reduce pace">
-                  <svg class="chevron"><use href="#chevron-left"></use></svg>
-                </button>
-                <button type="button" id="decrementPaceButton" class="btn-slider" aria-label="increase pace">
-                  <svg class="chevron"><use href="#chevron-right"></use></svg>
-                </button>
-              </span>
-            </div>
+          <div class="slider-controls">
+            <label for="weeklyPaceRange">Weekly pace: <span id="weeklyPaceSpan" class="mono"></span></label>
+            <span class="right">
+              <button type="button" id="incrementPaceButton" class="btn-slider" aria-label="reduce pace">
+                <svg class="chevron"><use href="#chevron-left"></use></svg>
+              </button>
+              <button type="button" id="decrementPaceButton" class="btn-slider" aria-label="increase pace">
+                <svg class="chevron"><use href="#chevron-right"></use></svg>
+              </button>
+            </span>
+          </div>
 
-            <input type="range" id="weeklyPaceRange" min="200" max="450" value="300" class="tandaSlider"/>
+          <input type="range" id="weeklyPaceRange" min="200" max="450" value="300" class="tandaSlider"/>
 
-          </form>
-        </div>
-
-        <div id="prediction-text" class="slider-space">
-          <p>Weekly running time: <span id="weeklyTimeValue" class="mono"></span></p>
-          <p>Junk pace is slower than: <span id="junkPaceValue" class="mono"></span></p>
-          <label class="switch">
-            km
-            <input type="checkbox" id="miles" value="miles" onchange="crApp.predictor.update();">
-            <span class="slider"></span>
-            Miles
-          </label>
-        </div>
+        </form>
       </div>
-    </section>
 
-    <section>
       <svg id="tandaGraph"></svg>
-    </section>
+    </div>
+
+    <div id="auxiliary">
+      <p>Weekly running time: <span id="weeklyTimeValue" class="mono"></span></p>
+      <p>Junk pace is slower than: <span id="junkPaceValue" class="mono"></span></p>
+      <label class="switch">
+        km
+        <input type="checkbox" id="miles" value="miles" onchange="crApp.predictor.update();">
+        <span class="slider"></span>
+        Miles
+      </label>
+    </div>
   </main>
 
   <footer>

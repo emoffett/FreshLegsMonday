@@ -281,7 +281,7 @@ crApp.tandaSpace = function () {
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("class", "guide-label");
       label.setAttribute("y", `${windowY(p) - 2}`);  // The "-2" puts the label above the guide
-      label.textContent = crApp.secondsToHms(p) + crApp.distanceUnit.unit;
+      label.textContent = crApp.secondsToHms(p) + "/" + crApp.distanceUnit.unit;
       guides.append(label);
     }
 

@@ -1,3 +1,5 @@
+/* General styling */
+/* Breakpoints are 25em, 43em and 62em */
 :root {
   --primary-colour: #008800;
   --primary-contrast-colour: #fefefe;
@@ -6,12 +8,6 @@
   --adjacent-colour: #006666;
   --opacity: 100%;
   --hover-opacity: 70%;
-}
-
-@media (width < 25em) {
-  html {
-    font-size: 0.8em;
-  }
 }
 
 @font-face {
@@ -47,77 +43,29 @@ a:link, a:visited {
   color: var(--adjacent-colour);
 }
 
-/* Sliding ranges */
-input[type=range] {
-  -webkit-appearance: none;  /* Override default CSS styles */
-  appearance: none;
-  background: var(--secondary-colour);
-  height: 0.25em;
-  margin: 1em 0;
-  opacity: var(--opacity); /* Set transparency (for mouse-over effects on hover) */
-  outline: none;
-  width: 100%;
+.max-width { width: 100%; }
+@media (width > 62em) {
+  .max-width { margin-right: 2em; }
 }
 
-input[type=range]:hover { opacity: var(--hover-opacity); }
-
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 2em;
-  height: 2em;
-  background:  var(--primary-colour);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+@media (width > 62em) {
+  .large-row {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
-input[type=range]::-moz-range-thumb {
-  width: 2em;
-  height: 2em;
-  background:  var(--primary-colour);
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
+.right { margin-left: auto; }
 
-/* Floating buttons */
-.btn-slider {
-  background-color: var(--primary-colour);
-  border-radius: 50%;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
-  box-sizing: border-box;
-  color: var(--primary-contrast-colour);
-  display: inline-block;
-  font-size: 1.25em;
-  height: 2em;
-  line-height: 2em;
-  opacity: var(--opacity); /* Set transparency (for mouse-over effects on hover) */
-  position: relative;
-  text-align: center;
-  touch-action: manipulation; /* Allow the slider buttons to be hammered without mobile 300ms click delay kicking in */
-  user-select: none;
-  width: 2em;
-}
-
-.btn-slider:hover { opacity: var(--hover-opacity); }
-
-.chevron {
-  height: 75%;
-  width: 75%;
-  fill: var(--primary-contrast-colour);
-}
+.mono { font-family: "Roboto Mono", monospace; }
 
 /* Switches */
-/* Hide default HTML checkbox */
-.switch input {
+.switch input {  /* Hide default HTML checkbox */
   opacity: 0;
   width: 0;
   height: 0;
   position: absolute;
 }
-
-/* The slider */
 .slider {
   position: relative;
   display: inline-block;
@@ -129,7 +77,6 @@ input[type=range]::-moz-range-thumb {
   -webkit-transition: .2s;
   width: 1.75em;
 }
-
 .slider:before {
   background-color: var(--primary-colour);
   border-radius: 50%;
@@ -143,14 +90,20 @@ input[type=range]::-moz-range-thumb {
   width: 1.25em;
   -webkit-transition: .2s;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(0.5em);
   transform: translateX(0.5em);
 }
-
 .slider:hover { opacity: var(--hover-opacity); }
 
+
+
+/* Page structure */
+@media (width < 25em) {
+  html {
+    font-size: 0.8em;
+  }
+}
 
 body {
   font-family: "Roboto", sans-serif;
@@ -181,45 +134,21 @@ main {
 
 @media (width > 43em) {
   main {
-    width: 70%;
+    width: 80%;
   }
 }
 
-.right {
-  margin-left: auto;
-}
 
-.slider-controls {
-  display: flex;
-  align-items: center;
-  width: available;
-}
 
-.max-width { width: 100%; }
-
-.slider-space { margin-top: 3em; }
-
-.mono { font-family: "Roboto Mono", monospace; }
-
-@media (width > 62em) {
-  .large-row {
-    display: flex;
-    flex-direction: row;
-  }
-  #prediction-text {
-    padding-left: 2em;
-    width: 30%;
-  }
-  #tandaGraph {
-    width: 70%;
-  }
-}
-
+/* Component styling */
+/* Header */
 header h1 {
   margin: 0;
   padding: 0.375em 0.375em 0.375em 0.75em;
 }
 
+
+/* Prediction */
 main h1 {
   position: sticky;
   top: 10px;
@@ -237,14 +166,80 @@ main h1 {
   font-size: xxx-large;
 }
 
-#weeklyDistanceSpan { white-space: pre; }
 
-#weeklyPaceRange { direction: rtl; }
+/* Predictor */
+.slider-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 3em;
+}
 
+/* Sliding ranges */
+input[type=range] {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  background: var(--secondary-colour);
+  height: 0.25em;
+  margin: 1em 0;
+  opacity: var(--opacity); /* Set transparency (for mouse-over effects on hover) */
+  outline: none;
+  width: 100%;
+}
+input[type=range]:hover { opacity: var(--hover-opacity); }
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 2em;
+  height: 2em;
+  background:  var(--primary-colour);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+input[type=range]::-moz-range-thumb {
+  width: 2em;
+  height: 2em;
+  background:  var(--primary-colour);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Floating buttons */
+.btn-slider {
+  background-color: var(--primary-colour);
+  border-radius: 50%;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+  box-sizing: border-box;
+  color: var(--primary-contrast-colour);
+  display: inline-block;
+  font-size: 1.25em;
+  height: 2em;
+  line-height: 2em;
+  opacity: var(--opacity); /* Set transparency (for mouse-over effects on hover) */
+  position: relative;
+  text-align: center;
+  touch-action: manipulation; /* Allow the slider buttons to be hammered without mobile 300ms click delay kicking in */
+  user-select: none;
+  width: 2em;
+}
+.btn-slider:hover { opacity: var(--hover-opacity); }
+.chevron {
+  height: 75%;
+  width: 75%;
+  fill: var(--primary-contrast-colour);
+}
+
+
+/* Tanda space */
 #tandaGraph {
   aspect-ratio: 16/9;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 3em;
+}
+@media (width > 62em) {
+  #tandaGraph {
+    width: 70%;
+  }
 }
 
 .guide {
@@ -272,12 +267,27 @@ main h1 {
   text-anchor: end;
 }
 
+
+/* Auxiliary */
+#weeklyDistanceSpan { white-space: pre; }
+
+#weeklyPaceRange { direction: rtl; }
+
+@media (width > 62em) {
+  #prediction-text {
+    padding-left: 2em;
+    width: 30%;
+  }
+}
+
+
+/* Footer */
 footer {
   /* Get the footer to sit at the bottom of the page */
   background-color: var(--secondary-colour);
   bottom: 0;
   box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
-  margin-top: 0.75em;
+  margin-top: 2em;
   position: relative;
 }
 
@@ -290,6 +300,11 @@ footer {
   /* Allow the main section to take up the length of the page so that the footer can sit at the bottom */
   margin-bottom: auto;
 }
+@media (width > 43em) {
+  .footer-content {
+    width: 70%;
+  }
+}
 
 .external-icon {
   height: 2em;
@@ -298,12 +313,6 @@ footer {
 #footer-boilerplate {
   font-size: small;
   text-align: right;
-}
-
-@media (width > 43em) {
-  .footer-content {
-    width: 70%;
-  }
 }
 
 footer h2 { margin-bottom: 0; }
