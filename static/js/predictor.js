@@ -22,6 +22,11 @@ let crApp = {
   weeklyPace: 300,
 };
 
+crApp.updateAll = function () {
+  crApp.predictor.update();
+  crApp.tandaSpace.render();
+}
+
 crApp.tanda = function(distance, pace) {
   // 'distance' is the distance ran per week over the previous 8 weeks in km
   // 'pace' is the average pace at which this distance was run in seconds per km
@@ -50,6 +55,11 @@ crApp.secondsToHms = function(seconds) {
   return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
 }
 
+crApp.addMultipleEventListeners = function(element, events, handler) {
+  // Add listeners for both mouse and touch events
+  events.forEach(e => element.addEventListener(e, handler))
+}
+
 crApp.predictor = function() {
   /* private variables */
   const tandaPrediction = document.getElementById("tandaPrediction");
@@ -68,13 +78,12 @@ crApp.predictor = function() {
 
   const weeklyTimeValue = document.getElementById("weeklyTimeValue");
   const junkPaceValue = document.getElementById("junkPaceValue");
-
-  const sliderButtons = document.getElementsByClassName("btn-slider");
-  const startEvents = ['touchstart', 'mousedown'];
-  const endEvents = ['touchend', 'touchcancel', 'mouseup', 'mouseleave'];
-
   const milesCheckbox = document.getElementById("miles");
 
+  const sliderButtons = document.getElementsByClassName("btn-slider");
+
+  const startEvents = ['touchstart', 'mousedown'];
+  const endEvents = ['touchend', 'touchcancel', 'mouseup', 'mouseleave'];
   let mouseHeld = false;
 
   let update = function() {
@@ -92,7 +101,6 @@ crApp.predictor = function() {
       crApp.junkPace(crApp.weeklyDistance*crApp.distanceUnit.inKM, crApp.weeklyPace/crApp.distanceUnit.inKM)
       * crApp.distanceUnit.inKM
     ) + "/" + crApp.distanceUnit.unit;
-    crApp.tandaSpace.render();
   }
 
   function changeUnits(newUnit) {
@@ -110,6 +118,8 @@ crApp.predictor = function() {
     crApp.weeklyPace = newPace;
     weeklyPaceRange.value = crApp.weeklyPace;
     crApp.distanceUnit = newUnit;
+
+    crApp.tandaSpace.render();
   }
 
   // Repeatedly update the tanda prediction while a user holds down a button
@@ -125,7 +135,7 @@ crApp.predictor = function() {
       if (time < nextTime) return;
       nextTime = time + delay;
       step();
-      update();
+      crApp.updateAll();
     }
     // timeout delay makes it easier for a user to get just a single increment from a quick click
     setTimeout(function (){
@@ -133,22 +143,17 @@ crApp.predictor = function() {
     }, 150);
   }
 
-  // Add listeners for both mouse and touch events
-  function addMultipleEventListeners(element, events, handler) {
-    events.forEach(e => element.addEventListener(e, handler))
-  }
-
   /* Slider listeners: */
   for (const slider of tandaSliders) {
     slider.addEventListener("input", () => {
       crApp.weeklyDistance = weeklyDistanceRange.value;
       crApp.weeklyPace = weeklyPaceRange.value;
-      update();
+      crApp.updateAll();
     });
   }
 
   /* Button listeners: */
-  addMultipleEventListeners(decrementDistanceButton, startEvents, event => {
+  crApp.addMultipleEventListeners(decrementDistanceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
       crApp.weeklyDistance--;
@@ -156,7 +161,7 @@ crApp.predictor = function() {
     });
   });
 
-  addMultipleEventListeners(incrementDistanceButton, startEvents, event => {
+  crApp.addMultipleEventListeners(incrementDistanceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
       crApp.weeklyDistance++;
@@ -164,7 +169,7 @@ crApp.predictor = function() {
     });
   });
 
-  addMultipleEventListeners(incrementPaceButton, startEvents, event => {
+  crApp.addMultipleEventListeners(incrementPaceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
       crApp.weeklyPace++;
@@ -172,7 +177,7 @@ crApp.predictor = function() {
     });
   });
 
-  addMultipleEventListeners(decrementPaceButton, startEvents, event => {
+  crApp.addMultipleEventListeners(decrementPaceButton, startEvents, event => {
     event.preventDefault();
     mousePressed(function () {
       crApp.weeklyPace--;
@@ -182,7 +187,7 @@ crApp.predictor = function() {
 
   for (const button of sliderButtons) {
     // stop any mousePressed activity when the mouse/touch is lifted/moved off of the button
-    addMultipleEventListeners(button, endEvents, () => mouseHeld = false);
+    crApp.addMultipleEventListeners(button, endEvents, () => mouseHeld = false);
     // stop the context menu appearing when the button is held down
     button.addEventListener('contextmenu', (event) => event.preventDefault())
   }
@@ -207,16 +212,26 @@ crApp.tandaSpace = function () {
     tandaSpace.replaceChildren(...newNodes);
   }
 
-  function windowX(v) {
+  function windowX(v) {  // Distance to pixels
     v = v - crApp.distanceUnit.weeklyShortest;
     v = v / (crApp.distanceUnit.weeklyFurthest - crApp.distanceUnit.weeklyShortest);
     v = v * width;
     return v;
   }
-  function windowY(v) {
+  function windowY(v) {  // Pace to pixels
     v = v - crApp.distanceUnit.fastest;
     v = v / (crApp.distanceUnit.slowest - crApp.distanceUnit.fastest);
     v = v * height;
+    return v;
+  }
+  function inverseScaleX(v) {  // Pixels to distance - note: no offset for axis start
+    v = v / width;
+    v = v * (crApp.distanceUnit.weeklyFurthest - crApp.distanceUnit.weeklyShortest);
+    return v;
+  }
+  function inverseScaleY(v) {  // Pixels to pace - note: no offset for axis start
+    v = v / height;
+    v = v * (crApp.distanceUnit.slowest - crApp.distanceUnit.fastest);
     return v;
   }
 
@@ -225,7 +240,50 @@ crApp.tandaSpace = function () {
     circle.setAttribute("class", "tanda-point");
     circle.setAttribute("cx", windowX(distance));
     circle.setAttribute("cy", windowY(pace));
-    circle.setAttribute("r", "5");
+    circle.setAttribute("r", "15");
+
+    function handleMoveEvent(event, pointStart, newX, newY){
+      event.preventDefault();
+      event.stopPropagation();
+      let newWeeklyDistance = pointStart[2] + inverseScaleX(newX - pointStart[0]);
+      if (newWeeklyDistance < crApp.distanceUnit.weeklyShortest) {newWeeklyDistance = crApp.distanceUnit.weeklyShortest;}
+      if (newWeeklyDistance > crApp.distanceUnit.weeklyFurthest) {newWeeklyDistance = crApp.distanceUnit.weeklyFurthest;}
+      let newWeeklyPace = pointStart[3] + inverseScaleY(newY - pointStart[1]);
+      if (newWeeklyPace < crApp.distanceUnit.fastest) {newWeeklyPace = crApp.distanceUnit.fastest;}
+      if (newWeeklyPace > crApp.distanceUnit.slowest) {newWeeklyPace = crApp.distanceUnit.slowest;}
+      circle.setAttribute("cx", windowX(newWeeklyDistance));
+      circle.setAttribute("cy", windowY(newWeeklyPace));
+      crApp.weeklyDistance = Math.round(newWeeklyDistance);
+      crApp.weeklyPace = Math.round(newWeeklyPace);
+      crApp.predictor.update();
+    }
+
+    circle.addEventListener("touchstart", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      let pointStart = [event.targetTouches[0].clientX, event.targetTouches[0].clientY, crApp.weeklyDistance, crApp.weeklyPace];
+      circle.addEventListener("touchmove", (e) => {
+        handleMoveEvent(e, pointStart, e.targetTouches[0].clientX, e.targetTouches[0].clientY);
+      });
+      circle.addEventListener("touchend", ()=>{crApp.updateAll();});
+      circle.addEventListener("touchcancel", ()=>{crApp.updateAll();});
+    });
+
+    circle.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      let pointStart = [event.clientX, event.clientY, crApp.weeklyDistance, crApp.weeklyPace];
+      circle.addEventListener("mousemove", (e) => {
+        if (e.buttons) {
+          handleMoveEvent(e, pointStart, e.clientX, e.clientY);
+        } else {
+          pointStart = [];
+          crApp.updateAll();
+        }
+      });
+      circle.addEventListener("mouseup", ()=>{crApp.updateAll();});
+    });
+
     return circle;
   }
 
@@ -307,5 +365,5 @@ crApp.tandaSpace = function () {
 }();
 
 window.addEventListener("load", () => {
-  crApp.predictor.update();
+  crApp.updateAll();
 });
