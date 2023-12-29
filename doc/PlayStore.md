@@ -23,7 +23,7 @@ Preview asset requirements: https://support.google.com/googleplay/android-develo
 1. [x] Short description (80char): Marathon finish time predictor
 2. [x] Full description (4000char): Fresh Legs Monday allows you to predict your Marathon finish time using the distance and pace that you typically run each week. You can use this app to guide your weekly training to achieve your target Marathon time.
 3. [x] Feature graphic of in-app experience with no alpha PNG/JPG 1024x500px (landscape)
-4. [x] Screenshots - These should be 16:9 for landscape (minimum 1920x1080px) screenshots and 9:16 for portrait screenshots (minimum 1080x1920px).
+4. [x] [Screenshots](playwright.md) - These should be 16:9 for landscape (minimum 1920x1080px) screenshots and 9:16 for portrait screenshots (minimum 1080x1920px).
 
 ### Digital Asset Link
 
