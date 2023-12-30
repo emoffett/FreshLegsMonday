@@ -27,8 +27,42 @@ module.exports = defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'feature-graphic',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: {width: 1024, height: 500},
+      },
     },
+    {
+      name: 'phone portrait',
+      use: {
+        ...devices['Pixel 7'],
+      },
+    },
+    {
+      name: 'tablet small portrait',
+      use: {
+        ...devices['iPad Mini'],
+      },
+    },
+    {
+      name: 'tablet small landscape',
+      use: {
+        ...devices['iPad Mini landscape'],
+      },
+    },
+    {
+      name: 'tablet large portrait',
+      use: {
+        ...devices['iPad Pro 11'],
+      },
+    },
+    {
+      name: 'tablet large landscape',
+      use: {
+        ...devices['iPad Pro 11 landscape'],
+      },
+    },
+
   ],
 });
