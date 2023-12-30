@@ -200,11 +200,13 @@ crApp.predictor = function() {
 
 crApp.tandaSpace = function () {
   const tandaSpace = document.getElementById("tandaGraph");
-  const width = tandaSpace.width.baseVal.value;  // SVG pixels
-  const height = tandaSpace.height.baseVal.value;  // SVG pixels
   const step = 1;  // Length between calculations in distance units
+  let width = tandaSpace.width.baseVal.value;  // SVG pixels
+  let height = tandaSpace.height.baseVal.value;  // SVG pixels
 
   function render() {
+    width = tandaSpace.width.baseVal.value;  // SVG pixels
+    height = tandaSpace.height.baseVal.value;  // SVG pixels
     let newNodes = [];
     newNodes.push(guides());
     newNodes.push(tandaPoint(crApp.weeklyDistance, crApp.weeklyPace));
@@ -366,4 +368,5 @@ crApp.tandaSpace = function () {
 
 window.addEventListener("load", () => {
   crApp.updateAll();
+  window.addEventListener("resize", () => {crApp.tandaSpace.render();});
 });
