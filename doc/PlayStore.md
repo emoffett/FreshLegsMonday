@@ -52,7 +52,7 @@ Navigate to `twa/`
 
 `bubblewrap merge`
 
-`bubblewrap update --appVersionName="GIVE IT A NAME"`
+`bubblewrap update --appVersionName="VERSION STRING"`
 
 From the /twa/ directory, build the TWA using
 

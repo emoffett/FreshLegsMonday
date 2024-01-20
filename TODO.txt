@@ -1,3 +1,8 @@
+TODO: Document using https://www.pwabuilder.com/
+TODO: Sliders updating after using tandaspace
+TODO: Add recommended manifest options: https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/
+TODO: Update Play store
+TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
 TODO: Pacing table
 TODO: Splits table
 TODO: Add explanation notes, including min/max limits
@@ -6,10 +11,9 @@ TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Install text conditional on support and button activated by a link/icon there which is conditional on support
   - Firefox seemingly doesn't support PWA installation
   - Probably can only install using Safari on iOS
-TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
 TODO: Chevron alignment slightly low of centre...why?
 TODO: Change mile/km to be draggable - either 2 position slider which accepts clicks or https://codepen.io/HiddeDeRidder/pen/REYmQB?css-preprocessor=sass
-TODO: Add monochrome icon
+TODO: Add monochrome icon (apply using bubblewrap --init and adding the Monochrome icon URL, or something to this effect)
  - redo icons in AndroidStudio? - https://dbushell.com/2020/06/01/bubblewrap-twa-pwa-apps-android-studio/
  - redo icons in figma? - https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
 TODO: Add to f-droid - https://f-droid.org/en/docs/Inclusion_Policy/
