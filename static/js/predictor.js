@@ -52,7 +52,9 @@ crApp.secondsToHms = function(seconds) {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor(seconds % 3600 / 60);
   const s = Math.floor(seconds % 3600 % 60);
-  return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s);
+  const minutesPadding = m < 10 ? "0" : "";
+  const secondsPadding = s < 10 ? "0" : "";
+  return ((h > 0 ? h + ":" + minutesPadding : "") + m + ":" + secondsPadding + s);
 }
 
 crApp.addMultipleEventListeners = function(element, events, handler) {
@@ -101,6 +103,8 @@ crApp.predictor = function() {
       crApp.junkPace(crApp.weeklyDistance*crApp.distanceUnit.inKM, crApp.weeklyPace/crApp.distanceUnit.inKM)
       * crApp.distanceUnit.inKM
     ) + "/" + crApp.distanceUnit.unit;
+    weeklyDistanceRange.value = crApp.weeklyDistance;
+    weeklyPaceRange.value = crApp.weeklyPace;
   }
 
   function changeUnits(newUnit) {
@@ -146,8 +150,8 @@ crApp.predictor = function() {
   /* Slider listeners: */
   for (const slider of tandaSliders) {
     slider.addEventListener("input", () => {
-      crApp.weeklyDistance = weeklyDistanceRange.value;
-      crApp.weeklyPace = weeklyPaceRange.value;
+      crApp.weeklyDistance = parseInt(weeklyDistanceRange.value);
+      crApp.weeklyPace = parseInt(weeklyPaceRange.value);
       crApp.updateAll();
     });
   }

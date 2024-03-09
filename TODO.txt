@@ -1,5 +1,4 @@
 TODO: Document using https://www.pwabuilder.com/
-TODO: Sliders updating after using tandaspace
 TODO: Add recommended manifest options: https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/
 TODO: Update Play store
 TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
