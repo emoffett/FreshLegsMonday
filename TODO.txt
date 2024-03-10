@@ -1,6 +1,6 @@
-TODO: Document using https://www.pwabuilder.com/
-TODO: Add recommended manifest options: https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/
+TODO: Make app work offline (see PWS Builder)
 TODO: Update Play store
+TODO: Document using https://www.pwabuilder.com/
 TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
 TODO: Pacing table
 TODO: Splits table
@@ -16,3 +16,5 @@ TODO: Add monochrome icon (apply using bubblewrap --init and adding the Monochro
  - redo icons in AndroidStudio? - https://dbushell.com/2020/06/01/bubblewrap-twa-pwa-apps-android-studio/
  - redo icons in figma? - https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
 TODO: Add to f-droid - https://f-droid.org/en/docs/Inclusion_Policy/
+TODO: Use as a widget
+TODO: Publish in Windows store

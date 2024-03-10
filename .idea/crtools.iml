@@ -6,4 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="analytics" level="application" />
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="f9648aac-a0fb-4cc2-858f-26a6136065c1" />
+  </component>
 </module>
