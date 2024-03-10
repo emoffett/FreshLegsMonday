@@ -2,6 +2,7 @@
 // This code executes in its own worker or thread
 
 // Which resources we want to make available offline at time of installation
+const cacheName = "pwa-assets-v3-3-0";
 const urlsToCache = [
   "/index.html",
 
@@ -45,50 +46,50 @@ const urlsToCache = [
   "/js/predictor.js"
 ];
 
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open("pwa-assets")
-    .then(cache => {
-      return cache.addAll(urlsToCache);
-    })
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    (async () => {
+      const cache = await caches.open(cacheName);
+      await cache.addAll(urlsToCache);
+    })(),
   );
-  console.log("Service worker installed");
 });
 
-self.addEventListener("activate", event => {
-  console.log("Service worker activated");
+self.addEventListener("activate", (e) => {
+  // Clear the old cache when the cacheName is updated
+  e.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(
+        keyList.map((key) => {
+          if (key === cacheName) {
+            return;
+          }
+          return caches.delete(key);
+        }),
+      );
+    }),
+  );
 });
 
-// Stale While Revalidate: Send a request to the network and in parallel look in the cache
-// If a cache hit respond with that, otherwise wait for the network response
-// Either way, update the cache with the latest from the network.
-
-// Assumes that we only want to handle GET requests for the app itself
-// When a request comes into your service worker, there are two things you can do; you can ignore it,
-// which lets it go to the network, or you can respond to it.
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", (e) => {
   let crossSite = false;
-  if (event.request.url && event.request.referrer) {
-    const requestUrl = new URL(event.request.url);
-    const referrerUrl = new URL(event.request.referrer);
+  if (e.request.url && e.request.referrer) {
+    const requestUrl = new URL(e.request.url);
+    const referrerUrl = new URL(e.request.referrer);
     if (requestUrl.origin !== referrerUrl.origin) crossSite = true;
   }
 
   if (!crossSite) { // don't try to use caching for cross site content, e.g. Google Analytics
-    event.respondWith(
-      caches
-        .match(event.request)
-        .then(cachedResponse => {
-          const networkFetch = fetch(event.request)
-            .then(response => {
-              caches
-                .open("pwa-assets")
-                .then(cache => {
-                  cache.put(event.request, response.clone());
-                });
-          });
-          return cachedResponse || networkFetch;
-        })
+    e.respondWith(
+      (async () => {
+        const cacheHit = await caches.match(e.request);
+        if (cacheHit) return cacheHit;
+        const response = await fetch(e.request);
+        await caches.open(cacheName).then(cache => {
+          cache.put(e.request, response.clone());
+        });
+        return response;
+      })(),
     );
   }
 });
