@@ -1,4 +1,6 @@
 TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
+TODO: Publish in Windows store
+TODO: Add to f-droid - https://f-droid.org/en/docs/Inclusion_Policy/
 TODO: Pacing table
 TODO: Splits table
 TODO: Add explanation notes, including min/max limits
@@ -12,6 +14,4 @@ TODO: Change mile/km to be draggable - either 2 position slider which accepts cl
 TODO: Add monochrome icon
  - redo icons in AndroidStudio? - https://dbushell.com/2020/06/01/bubblewrap-twa-pwa-apps-android-studio/
  - redo icons in figma? - https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
-TODO: Add to f-droid - https://f-droid.org/en/docs/Inclusion_Policy/
 TODO: Use as a widget
-TODO: Publish in Windows store

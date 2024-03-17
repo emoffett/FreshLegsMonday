@@ -5,6 +5,7 @@ node_modules
 dist
 .cache
 .idea
+*.xcworkspace
 /twa/.gradle/
 /twa/app-release-bundle.aab
 /twa/app-release-signed.apk
