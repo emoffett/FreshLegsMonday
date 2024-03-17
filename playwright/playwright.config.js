@@ -63,6 +63,31 @@ module.exports = defineConfig({
         ...devices['iPad Pro 11 landscape'],
       },
     },
+    {
+      name: 'iPhone 6.7"',
+      use: {
+        ...devices['iPhone 14 Pro Max'],
+      },
+    },
+    {
+      name: 'iPhone 6.5"',
+      use: {
+        ...devices['iPhone 14 Plus'],
+      },
+    },
+    {
+      name: 'iPhone 5.5"',
+      use: {
+        ...devices['iPhone 8 Plus'],
+      },
+    },
+    {
+      name: 'iPad Pro 12.9"',
+      use: {
+        ...devices['iPad Pro 11'],
+        viewport: {width: 2048, height: 2732},
+      },
+    },
 
   ],
 });

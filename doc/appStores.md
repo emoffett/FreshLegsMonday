@@ -9,7 +9,9 @@ The native apps are a Trusted Web Activity (TWA) apps made from the web app (the
 7. Make commit(s) of any outstanding changes and push to GitHub
 
 ## Apple App Store
-
+1. Use [PWABuilder](https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/) to generate an iOS package
+   1. Set the Bundle ID to com.freshlegsmonday
+   2. Update `App name` to `Fresh Legs Monday`
 
 ## Play Store App
 The Play Store is for Android and Chromebook Apps.

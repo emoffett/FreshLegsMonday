@@ -1,4 +1,4 @@
-PWA
+## PWA
 
 Chrome will check for PWA manifest updates periodically: [web.dev](https://web.dev/manifest-updates/)
 
@@ -14,4 +14,14 @@ Adjacent colours guided by https://paletton.com/#uid=52P0u0kw0llnWt4trpKEygYOhbv
 Inline SVG icons are to allow central CSS styling without having to use JS to inject the SVGs.
 The chevrons are from the Material Design Icons set
 
-To create the Android Play Store app, see [PlayStore.md](appStores)
+To create the apps, see [appStores.md](appStores)
+
+## Marketing spiel
+
+### Description
+Fresh Legs Monday allows you to predict your Marathon finish time using the distance and pace that you typically run each week. You can use this app to guide your weekly training to achieve your target Marathon time.
+
+### Promotional text
+*<=170 char for Apple App Store*
+
+Marathon time predictor
