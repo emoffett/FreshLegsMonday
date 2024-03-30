@@ -77,6 +77,12 @@
       "type": "image/png",
       "sizes": "1024x1024",
       "purpose": "any"
+    },
+    {
+      "src": "/img/favicons/apple-icon-1024x1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "any"
     }
   ],
   "screenshots": [

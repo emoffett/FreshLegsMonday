@@ -67,12 +67,14 @@ module.exports = defineConfig({
       name: 'iPhone 6.7"',
       use: {
         ...devices['iPhone 14 Pro Max'],
+        viewport: {width: 430, height: 932},
       },
     },
     {
       name: 'iPhone 6.5"',
       use: {
         ...devices['iPhone 14 Plus'],
+        viewport: {width: 428, height: 926},
       },
     },
     {
@@ -85,7 +87,7 @@ module.exports = defineConfig({
       name: 'iPad Pro 12.9"',
       use: {
         ...devices['iPad Pro 11'],
-        viewport: {width: 2048, height: 2732},
+        viewport: {width: 1024, height: 1366},
       },
     },
 

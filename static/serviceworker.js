@@ -32,6 +32,7 @@ const urlsToCache = [
   "/img/favicons/apple-icon-114x114.png",
   "/img/favicons/apple-icon-120x120.png",
   "/img/favicons/apple-icon-180x180.png",
+  "/img/favicons/apple-icon-1024x1024.png",
 
   "/img/favicons/favicon.ico",
   "/img/favicons/favicon-16x16.png",

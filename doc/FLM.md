@@ -25,3 +25,18 @@ Fresh Legs Monday allows you to predict your Marathon finish time using the dist
 *<=170 char for Apple App Store*
 
 Marathon time predictor
+
+### Keywords
+Marathon Running
+
+### Support URL
+https://freshlegsmonday.com/html/contact.html
+
+### Marketing URL
+N/A
+
+### Privacy URL
+https://freshlegsmonday.com/html/privacy.html
+
+
+
