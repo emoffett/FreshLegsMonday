@@ -1,25 +1,37 @@
-import { test } from '@playwright/test';
+// Import test and extend it to have a "store" to allow screenshots to be separated appropriately
+import { test as base } from '@playwright/test';
+const test = base.extend({
+  store: ["StoreNotSet", { option: true }],
+});
+export { test };
 
 test.describe('Generate screenshots using Playwright', () => {
+  const url = 'http://localhost:63342/crtools/static/';
+  const now = new Date()
+  const time = now.getTime();
+  const expiry = time/1000 + 60;
+  const appPlatformCookie = { name:"app-platform", value:"screenshot", url:url, expires:expiry }  // Used to signal that app store logos, etc., should be hidden
 
-  test('Device screenshot km', async ({ page }) => {
+  test('Device screenshot km', async ({ page, context, store }) => {
     let name = test.info().project.name;
     if (name !== 'feature-graphic') {
       name += " km"
     }
-    await page.goto('http://localhost:63342/crtools/static/');
-    await page.screenshot({path: '../static/img/PlayStore/' + name + '.png'});
+    await context.addCookies([appPlatformCookie]);
+    await page.goto(url);
+    await page.screenshot({ path: '../static/img/' + store + '/' + name + '.png' });
   })
 
-  test('Device screenshot miles', async ({ page }) => {
+  test('Device screenshot miles', async ({ page, context, store }) => {
     let name = test.info().project.name;
     if (name !== 'feature-graphic') {
       name += " miles"
-      await page.goto('http://localhost:63342/crtools/static/');
+      await context.addCookies([appPlatformCookie]);
+      await page.goto(url);
       const milesButton = await page.$('#miles');
-      await milesButton.evaluate((node) => {node.click()});
+      await milesButton.evaluate((node) => { node.click() });
       await page.waitForTimeout(500);
-      await page.screenshot({path: '../static/img/PlayStore/' + name + '.png'});
+      await page.screenshot({ path: '../static/img/' + store + '/' + name + '.png' });
     }
   })
 
