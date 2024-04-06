@@ -3,6 +3,7 @@ if ('serviceWorker' in navigator) {
    navigator.serviceWorker.register("/serviceworker.js");
 }
 
+// The main predictor app
 function DistanceUnit(inKm, unit, units, weeklyShortest, weeklyFurthest, fastest, slowest) {
   this.inKM = inKm;
   this.unit = unit;
@@ -370,7 +371,33 @@ crApp.tandaSpace = function () {
   };
 }();
 
+// Initialise the main app and ensure that it is re-rendered on resize
 window.addEventListener("load", () => {
   crApp.updateAll();
   window.addEventListener("resize", () => {crApp.tandaSpace.render();});
+});
+
+// Add the store links and images, as appropriate, based on the available cookies
+window.addEventListener("load", () => {
+  const appPlatform = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("app-platform="))
+    ?.split("=")[1];
+  if (appPlatform === "iOS App Store" || appPlatform === "screenshot") {}  // in iOS or taking screenshots
+  else
+    {
+      const resources = document.getElementById("resources");
+
+      let pwaLi = document.createElement("li");
+      pwaLi.innerHTML += "Get the free app on any device by opening the browser menu and selecting 'Install Fresh Legs Monday' <br>";
+      pwaLi.id = "install-prompt";
+
+      let playStoreLink = document.createElement("a");
+      playStoreLink.href = "https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa";
+      playStoreLink.target = "_blank";
+      playStoreLink.innerHTML += "<img class='external-icon' alt='Get it on Google Play' src='../img/PlayStore/google-play-badge.png'>"
+      pwaLi.append(playStoreLink);
+
+      resources.prepend(pwaLi);
+    }
 });
