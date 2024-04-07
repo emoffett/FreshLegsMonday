@@ -26,7 +26,7 @@ sudo ./basic.sh
    Note 3: the product Archives are accessible via Window > Organizer
    5. To distribute the Archive, US English might be required, otherwise Apple will say that the app already exists...
 
-## Play Store App
+## Play Store
 The Play Store is for Android and Chromebook Apps.
 
 1. Use [PWABuilder](https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/) to generate an Android package
@@ -44,3 +44,11 @@ The Play Store is for Android and Chromebook Apps.
 4. Write the `Release notes`
 5. Click through everything
 6. Update Play Store listing, e.g. screenshots
+
+## Microsoft Store
+For Windows devices
+
+1. Use [PWABuilder](https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/) to generate a package
+   1. Copy the IDs from [Microsoft Partner Centre](https://partner.microsoft.com/en-us/dashboard/products/9PPBNZGK4RXW/identity)
+   2. `Classic app version` should be 1.0.0
+   3.

@@ -38,5 +38,5 @@ N/A
 ### Privacy URL
 https://freshlegsmonday.com/html/privacy.html
 
-
-
+### Age rating
+iarc_rating_id: `2af61685-932a-4f9a-8cc5-21c8893e0852`

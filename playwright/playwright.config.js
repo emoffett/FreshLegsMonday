@@ -70,6 +70,7 @@ module.exports = defineConfig({
         store: 'PlayStore',
       },
     },
+
     {
       name: 'iPhone 6.7"',
       use: {
@@ -107,6 +108,22 @@ module.exports = defineConfig({
         ...devices['iPad Pro 11'],
         viewport: { width: 1366, height: 1024 },
         store: 'AppleAppStore',
+      },
+    },
+
+    {
+      name: 'MS desktop landscape',
+      use: {
+        ...devices['iPad Pro 11 landscape'],
+        store: 'MicrosoftStore',
+      },
+    },
+    {
+      name: 'MS mobile portrait',
+      use: {
+        ...devices['Microsoft Lumia 950'],
+        deviceScaleFactor: 2,
+        store: 'MicrosoftStore',
       },
     },
 
