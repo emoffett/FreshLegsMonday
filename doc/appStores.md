@@ -26,6 +26,14 @@ sudo ./basic.sh
    Note 3: the product Archives are accessible via Window > Organizer
    5. To distribute the Archive, US English might be required, otherwise Apple will say that the app already exists...
 
+| App Name: | FreshLegsMonday |
+| - | - |
+| App Version Number: | 1.0 |
+| Platform: | iOS |
+| App SKU: | com.freshlegsmonday |
+| App Apple ID: | 6479964123 |
+
+
 ## Play Store
 The Play Store is for Android and Chromebook Apps.
 

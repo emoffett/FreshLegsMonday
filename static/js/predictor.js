@@ -395,8 +395,14 @@ window.addEventListener("load", () => {
       let playStoreLink = document.createElement("a");
       playStoreLink.href = "https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa";
       playStoreLink.target = "_blank";
-      playStoreLink.innerHTML += "<img class='external-icon' alt='Get it on Google Play' src='../img/PlayStore/google-play-badge.png'>"
+      playStoreLink.innerHTML += "<img class='external-icon' alt='Get it on Google Play' src='img/PlayStore/google-play-badge.png'>"
       pwaLi.append(playStoreLink);
+
+      let appStoreLink = document.createElement("a");
+      appStoreLink.href = "https://apps.apple.com/us/app/freshlegsmonday/id6479964123?itsct=apps_box_link&itscg=30200";
+      appStoreLink.target = "_blank";
+      appStoreLink.innerHTML += "<img class='external-icon' alt='Download on the App Store' src='img/AppleAppStore/apple-app-store.svg'>"
+      pwaLi.append(appStoreLink);
 
       resources.prepend(pwaLi);
     }

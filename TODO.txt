@@ -1,14 +1,6 @@
-TODO: Apple support ( https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com ?)
-TODO: Publish in Windows store
-TODO: Add to f-droid - https://f-droid.org/en/docs/Inclusion_Policy/
 TODO: Pacing table
 TODO: Splits table
 TODO: Add explanation notes, including min/max limits
-TODO: HTTP/2 https://stegard.net/2022/02/enable-http-2-with-apachephp-on-ubuntu/
 TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Chevron alignment slightly low of centre...why?
 TODO: Change mile/km to be draggable - either 2 position slider which accepts clicks or https://codepen.io/HiddeDeRidder/pen/REYmQB?css-preprocessor=sass
-TODO: Add monochrome icon
- - redo icons in AndroidStudio? - https://dbushell.com/2020/06/01/bubblewrap-twa-pwa-apps-android-studio/
- - redo icons in figma? - https://developer.android.com/develop/ui/views/launch/icon_design_adaptive
-TODO: Use as a widget
