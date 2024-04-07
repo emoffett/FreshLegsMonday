@@ -1,4 +1,4 @@
-// Import test and extend it to have a "store" to allow screenshots to be separated appropriately
+// Import test and extend the parameters to include "store" to allow screenshots to be put in per-store directories
 import { test as base } from '@playwright/test';
 const test = base.extend({
   store: ["StoreNotSet", { option: true }],

@@ -9,12 +9,22 @@ The native apps are a Trusted Web Activity (TWA) apps made from the web app (the
 7. Make commit(s) of any outstanding changes and push to GitHub
 
 ## Apple App Store
-1. Use [PWABuilder](https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/) to generate an iOS package
+1. Fire up the Mac (option `Macintosh SSD`) with
+```shell
+sudo ./basic.sh
+```
+2. From the Mac use [PWABuilder](https://www.pwabuilder.com/reportcard?site=https://freshlegsmonday.com/) to generate an iOS package
    1. Set the `Bundle ID` to com.freshlegsmonday
    2. Update `App name` to `Fresh Legs Monday`
    3. Open `All Settings` and set `Image URL` to `/img/favicons/icon-apple-1024x1024.png`
-   3. Follow [publishing instructions](https://docs.pwabuilder.com/#/builder/app-store?id=publishing)
-   4. To distribute the Archive, US English might be required, otherwise Apple will say that the app already exists...
+   4. Follow [publishing instructions](https://docs.pwabuilder.com/#/builder/app-store?id=publishing)
+   Note 1: the Apple-friendly icon should be downloaded to `~/FreshLegsMonday/static/img/favicons` with:
+   ```shell
+   wget https://freshlegsmonday.com/img/favicons/apple-icon-1024x1024.png
+   ```
+   Note 2: Project Navigator > Assets > AppIcon > App Store iOS 1024 -> change the image to the apple-icon-1024x1024.png
+   Note 3: the product Archives are accessible via Window > Organizer
+   5. To distribute the Archive, US English might be required, otherwise Apple will say that the app already exists...
 
 ## Play Store App
 The Play Store is for Android and Chromebook Apps.
