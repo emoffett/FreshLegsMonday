@@ -22,7 +22,7 @@
   "short_name": "Fresh Legs Monday",
   "start_url": "/index.html",
   "theme_color": "#008800",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "icons": [
     {
      "src": "img/favicons/android-icon-36x36.png",
