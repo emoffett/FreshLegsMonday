@@ -384,26 +384,31 @@ window.addEventListener("load", () => {
     .find((row) => row.startsWith("app-platform="))
     ?.split("=")[1];
   if (appPlatform === "iOS App Store" || appPlatform === "screenshot") {}  // in iOS or taking screenshots
-  else
-    {
-      const resources = document.getElementById("resources");
+  else {
+    const resources = document.getElementById("resources");
 
-      let pwaLi = document.createElement("li");
-      pwaLi.innerHTML += "Get the free app on any device by opening the browser menu and selecting 'Install Fresh Legs Monday' <br>";
-      pwaLi.id = "install-prompt";
+    let pwaLi = document.createElement("li");
+    pwaLi.innerHTML += "Get the free app on any device by opening the browser menu and selecting 'Install Fresh Legs Monday' <br>";
+    pwaLi.id = "install-prompt";
 
-      let playStoreLink = document.createElement("a");
-      playStoreLink.href = "https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa";
-      playStoreLink.target = "_blank";
-      playStoreLink.innerHTML += "<img class='external-icon' alt='Get it on Google Play' src='img/PlayStore/google-play-badge.png'>"
-      pwaLi.append(playStoreLink);
+    let playStoreLink = document.createElement("a");
+    playStoreLink.href = "https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa";
+    playStoreLink.target = "_blank";
+    playStoreLink.innerHTML += "<img class='external-icon' alt='Get it on Google Play' src='img/PlayStore/google-play-badge.png'>"
+    pwaLi.append(playStoreLink);
 
-      let appStoreLink = document.createElement("a");
-      appStoreLink.href = "https://apps.apple.com/us/app/freshlegsmonday/id6479964123?itsct=apps_box_link&itscg=30200";
-      appStoreLink.target = "_blank";
-      appStoreLink.innerHTML += "<img class='external-icon' alt='Download on the App Store' src='img/AppleAppStore/apple-app-store.svg'>"
-      pwaLi.append(appStoreLink);
+    let appStoreLink = document.createElement("a");
+    appStoreLink.href = "https://apps.apple.com/us/app/freshlegsmonday/id6479964123?itsct=apps_box_link&itscg=30200";
+    appStoreLink.target = "_blank";
+    appStoreLink.innerHTML += "<img class='external-icon' alt='Download on the App Store' src='img/AppleAppStore/apple-app-store.svg'>"
+    pwaLi.append(appStoreLink);
 
-      resources.prepend(pwaLi);
-    }
+    let microsoftStoreLink = document.createElement("a");
+    microsoftStoreLink.href = "https://apps.microsoft.com/detail/9ppbnzgk4rxw?ocid=webpdpshare";
+    microsoftStoreLink.target = "_blank";
+    microsoftStoreLink.innerHTML += "<img class='external-icon' alt='Download from the Microsoft Store' src='img/MicrosoftStore/microsoft-store.svg'>"
+    pwaLi.append(microsoftStoreLink);
+
+    resources.prepend(pwaLi);
+  }
 });
