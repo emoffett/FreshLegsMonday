@@ -225,8 +225,9 @@ input[type=range]::-moz-range-thumb {
 }
 .btn-slider:hover { opacity: var(--hover-opacity); }
 .chevron {
+  display: block;
   height: 75%;
-  width: 75%;
+  width: 100%;
   fill: var(--primary-contrast-colour);
 }
 
