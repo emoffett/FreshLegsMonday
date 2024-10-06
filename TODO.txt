@@ -1,5 +1,4 @@
 TODO: Pacing table
-TODO: Splits table
 TODO: Add explanation notes, including min/max limits
 TODO: Cookies and/or IndexedDB for continuity between page visits?
 TODO: Change mile/km to be draggable - either 2 position slider which accepts clicks or https://codepen.io/HiddeDeRidder/pen/REYmQB?css-preprocessor=sass

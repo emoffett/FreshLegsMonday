@@ -26,6 +26,7 @@ let crApp = {
 crApp.updateAll = function () {
   crApp.predictor.update();
   crApp.tandaSpace.render();
+  crApp.splitsTable.update();
 }
 
 crApp.tanda = function(distance, pace) {
@@ -125,6 +126,7 @@ crApp.predictor = function() {
     crApp.distanceUnit = newUnit;
 
     crApp.tandaSpace.render();
+    crApp.splitsTable.configure();
   }
 
   // Repeatedly update the tanda prediction while a user holds down a button
@@ -371,9 +373,93 @@ crApp.tandaSpace = function () {
   };
 }();
 
+crApp.splitsTable = function (){
+  const markersBody = document.getElementById("markersBody");
+  const markers = new Map();  // marker, [distance, column, row]  (row 0 is the topmost row)
+
+  function generateMarkers() {
+    markersBody.innerHTML = "";
+    markers.clear();
+
+    // First column
+    let marker = 1;
+    let row = 0;
+    while (marker * crApp.distanceUnit.inKM < 42.195 / 4 + 1) {
+      markers.set(marker.toString(), [marker * crApp.distanceUnit.inKM, 0, row]);
+      marker++;
+      row++;
+    }
+    // Second column
+    row = 0;
+    while (marker * crApp.distanceUnit.inKM < 42.195 / 2) {
+      markers.set(marker.toString(), [marker * crApp.distanceUnit.inKM, 1, row]);
+      marker++;
+      row++
+    }
+    markers.set("HM", [42.195 / 2, 1, row]);
+    // Third column
+    row = 0;
+    while (marker * crApp.distanceUnit.inKM < 42.195 * (3/4) + 1) {
+      markers.set(marker.toString(), [marker * crApp.distanceUnit.inKM, 2, row]);
+      marker++;
+      row++;
+    }
+    // Fourth column
+    row = 0;
+    while (marker * crApp.distanceUnit.inKM < 42.195) {
+      markers.set(marker.toString(), [marker * crApp.distanceUnit.inKM, 3, row]);
+      marker++;
+      row++;
+    }
+    markers.set("Finish", [42.195, 3, row]);
+  }
+
+  function configureSplitsTable(){
+    function addMarkerToTable(markerData, marker) {
+      let row;
+      // Add the row if the marker is in the first column, otherwise it already exists
+      if (markerData[1] === 0) {
+        row= markersBody.insertRow();
+        row.setAttribute("id", "splitsRow" + markerData[2]);
+      } else {
+        row = document.getElementById("splitsRow" + markerData[2]);
+      }
+
+      const distanceCell = row.insertCell();
+      const distanceText = document.createTextNode(marker);
+      distanceCell.appendChild(distanceText);
+      const splitCell = row.insertCell();
+      splitCell.setAttribute("id", "split" + marker);
+      splitCell.setAttribute("class", "split split-column");
+    }
+
+    generateMarkers();
+    markers.forEach(addMarkerToTable);
+    updateSplitsTable();
+  }
+
+  function updateSplitsTable() {
+    const prediction = crApp.tanda(crApp.weeklyDistance*crApp.distanceUnit.inKM, crApp.weeklyPace/crApp.distanceUnit.inKM);
+    const timePerKm = prediction / 42.195;
+
+    function updateSplit(markerData, marker) {
+      const cell = document.getElementById("split" + marker);
+      cell.innerText = crApp.secondsToHms(markerData[0] * timePerKm);
+    }
+
+    markers.forEach(updateSplit)
+  }
+
+  return {
+    configure: configureSplitsTable,
+    update: updateSplitsTable
+  }
+}();
+
 // Initialise the main app and ensure that it is re-rendered on resize
 window.addEventListener("load", () => {
   crApp.updateAll();
+  crApp.splitsTable.configure();
   window.addEventListener("resize", () => {crApp.tandaSpace.render();});
 });
 
