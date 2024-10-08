@@ -301,11 +301,6 @@ td, th {
   padding-left: 0.3em;
 }
 
-caption {
-  caption-side: bottom;
-  color: var(--secondary-colour);
-}
-
 .split {
   font-family: monospace;
 }

@@ -215,9 +215,9 @@ crApp.tandaSpace = function () {
     width = tandaSpace.width.baseVal.value;  // SVG pixels
     height = tandaSpace.height.baseVal.value;  // SVG pixels
     let newNodes = [];
-    newNodes.push(guides());
-    newNodes.push(tandaPoint(crApp.weeklyDistance, crApp.weeklyPace));
-    newNodes.push(tandaLines());
+    newNodes.push(createGuides());
+    newNodes.push(createTandaPoint(crApp.weeklyDistance, crApp.weeklyPace));
+    newNodes.push(createTandaLines());
     tandaSpace.replaceChildren(...newNodes);
   }
 
@@ -244,7 +244,7 @@ crApp.tandaSpace = function () {
     return v;
   }
 
-  function tandaPoint(distance, pace){
+  function createTandaPoint(distance, pace){
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("class", "tanda-point");
     circle.setAttribute("cx", windowX(distance));
@@ -296,7 +296,7 @@ crApp.tandaSpace = function () {
     return circle;
   }
 
-  function tandaLines(){
+  function createTandaLines(){
     const lines = document.createElementNS("http://www.w3.org/2000/svg", "g");
     for (let t = 2; t <= 7; t += 0.5) {  // t is in hours
       const time = t * 60 * 60;  // time is in seconds
@@ -333,35 +333,35 @@ crApp.tandaSpace = function () {
     return lines;
   }
 
-  function guides() {
+  function createGuides() {
     const guides = document.createElementNS("http://www.w3.org/2000/svg", "g");
     const secondsBetweenGuides = 60;
     const topGuide = Math.ceil((crApp.distanceUnit.fastest+1)/secondsBetweenGuides)*secondsBetweenGuides;
     const distanceBetweenGuides = 50;
     const leftGuide = Math.ceil((crApp.distanceUnit.weeklyShortest+1)/distanceBetweenGuides)*distanceBetweenGuides;
 
-    for (let p = topGuide; p < crApp.distanceUnit.slowest; p += secondsBetweenGuides) {
+    for (let pace = topGuide; pace < crApp.distanceUnit.slowest; pace += secondsBetweenGuides) {
       const guide = document.createElementNS("http://www.w3.org/2000/svg", "path");
       guide.setAttribute("class", "guide");
-      guide.setAttribute("d", `M0,${windowY(p)} H${width}`);
+      guide.setAttribute("d", `M0,${windowY(pace)} H${width}`);
       guides.append(guide);
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("class", "guide-label");
-      label.setAttribute("y", `${windowY(p) - 2}`);  // The "-2" puts the label above the guide
-      label.textContent = crApp.secondsToHms(p) + "/" + crApp.distanceUnit.unit;
+      label.setAttribute("y", `${windowY(pace) - 2}`);  // The "-2" puts the label above the guide
+      label.textContent = crApp.secondsToHms(pace) + "/" + crApp.distanceUnit.unit;
       guides.append(label);
     }
 
-    for (let d = leftGuide; d < crApp.distanceUnit.weeklyFurthest; d += 50) {
+    for (let distance = leftGuide; distance < crApp.distanceUnit.weeklyFurthest; distance += 50) {
       const guide = document.createElementNS("http://www.w3.org/2000/svg", "path");
       guide.setAttribute("class", "guide");
-      guide.setAttribute("d", `M${windowX(d)},0 V${height}`);
+      guide.setAttribute("d", `M${windowX(distance)},0 V${height}`);
       guides.append(guide);
       const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
       label.setAttribute("class", "guide-label");
       label.setAttribute("y", `${windowY(crApp.distanceUnit.slowest) - 2}`);
-      label.setAttribute("x", `${windowX(d) + 1}`);
-      label.textContent = d + crApp.distanceUnit.unit;
+      label.setAttribute("x", `${windowX(distance) + 1}`);
+      label.textContent = distance + crApp.distanceUnit.unit;
       guides.append(label);
     }
 
