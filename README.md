@@ -4,7 +4,7 @@ A tool to predict a runner's marathon performance from their weekly training bas
 
 [FreshLegsMonday.com](https://FreshLegsMonday.com) is also available as both a PWA and Android app.
 
-![Lighthouse screenshot](doc/Archive/Lighthouse desktop report 2022-12-14.png)
+![Lighthouse screenshot](doc/Archive/Lighthouse%20desktop%20report%202022-12-14.png)
 
 [![google-play-badge](static/img/PlayStore/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa "Link to FreshLegsMonday on Google Play")
 
