@@ -352,6 +352,14 @@ footer {
   height: 3em;
 }
 
+.spotify-logo {
+  stroke-width: 0;
+  height: 1.3em;
+  width: 1.3em;
+  fill: black;
+  margin-right: 0.2em;
+}
+
 #footer-boilerplate {
   font-size: small;
   text-align: right;
