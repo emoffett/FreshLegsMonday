@@ -39,8 +39,8 @@ button { all: unset; }
 h1, h2 { font-weight: normal; }
 
 a:link, a:visited {
-  text-decoration: none;
   color: var(--adjacent-colour);
+
 }
 
 .max-width { width: 100%; }
