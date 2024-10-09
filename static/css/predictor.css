@@ -1,5 +1,5 @@
 /* General styling */
-/* Breakpoints are 25em, 43em and 62em */
+/* Breakpoints are 25em, 43em, 51em and 62em */
 :root {
   --primary-colour: #008800;
   --primary-contrast-colour: #fefefe;
@@ -284,7 +284,6 @@ input[type=range]::-moz-range-thumb {
 /* Splits table */
 table {
   text-align: right;
-  width: 100%;
 }
 
 thead {
@@ -301,25 +300,23 @@ td, th {
   padding-left: 0.3em;
 }
 
-.split {
-  font-family: monospace;
-}
+.split {font-family: monospace;}
 
-.split-column {
-  width: 3.5em;
-}
+.split-column {width: 3.5em;}
 
-#splitsTable {
-  margin-top: 3em;
-}
+.marker-column {width: 3.1em;}
 
-@media (width <= 43em) {
+.spacing-column {background-color: white}
+
+#marathon-splits {margin-top: 2em;}
+
+@media (width <= 51em) {
   table {
     font-size: 75%;
+    width: 100%;
   }
-  .marker-header {
-    font-size: 0;
-  }
+  .marker-header {font-size: 0;}
+  .spacing-column {display: none}
 }
 
 

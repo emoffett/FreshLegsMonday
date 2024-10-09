@@ -423,11 +423,15 @@ crApp.splitsTable = function (){
         row.setAttribute("id", "splitsRow" + markerData[2]);
       } else {
         row = document.getElementById("splitsRow" + markerData[2]);
+        const spacerCell = row.insertCell();
+        spacerCell.setAttribute("class", "spacing-column");
       }
 
       const distanceCell = row.insertCell();
       const distanceText = document.createTextNode(marker);
       distanceCell.appendChild(distanceText);
+      distanceCell.setAttribute("class", "marker-column");
+
       const splitCell = row.insertCell();
       splitCell.setAttribute("id", "split" + marker);
       splitCell.setAttribute("class", "split split-column");
