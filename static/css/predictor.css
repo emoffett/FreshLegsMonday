@@ -306,7 +306,10 @@ td, th {
 
 .marker-column {width: 3.1em;}
 
-.spacing-column {background-color: white}
+.spacing-column {
+  background-color: white;
+  border-collapse: collapse;
+}
 
 #marathon-splits {margin-top: 2em;}
 
@@ -345,9 +348,9 @@ footer {
   }
 }
 
-.external-icon {
-  height: 3em;
-}
+#resources { padding-inline-start: 5%; }
+
+.external-icon { height: 3em; }
 
 .spotify-logo {
   stroke-width: 0;
