@@ -1,8 +1,7 @@
 # FreshLegsMonday
 A tool to predict a runner's marathon performance from their weekly training based on the Tanda formula
-![website screenshot](static/img/PlayStore/feature-graphic.png)
 
-[FreshLegsMonday.com](https://FreshLegsMonday.com) is also available as an app:
+Available at the [FreshLegsMonday.com](https://FreshLegsMonday.com) website and as an app:
 
 [Google Play](https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa "Link to FreshLegsMonday on Google Play")
 
@@ -12,6 +11,6 @@ A tool to predict a runner's marathon performance from their weekly training bas
 
 The Progressive Web App is installable from [FreshLegsMonday](https://freshlegsmonday.com).
 
-![Lighthouse screenshot](doc/Archive/Lighthouse%20desktop%20report%202022-12-14.png)
+![Lighthouse screenshot](doc/Archive/Lighthouse%20desktop%20report%202024-10-10.png)
 
 [Documentation](doc)

@@ -308,7 +308,7 @@ td, th {
 
 .spacing-column {
   background-color: white;
-  border-collapse: collapse;
+  border-width: 0;
 }
 
 #marathon-splits {margin-top: 2em;}
@@ -349,15 +349,16 @@ footer {
 }
 
 #resources { padding-inline-start: 5%; }
+.resource { margin-bottom: 0.5em; }
 
-.external-icon { height: 3em; }
+.external-icon { height: 2.75em; }
 
 .spotify-logo {
   stroke-width: 0;
   height: 1.3em;
   width: 1.3em;
   fill: black;
-  margin: 0.52em;
+  margin: 0.25em;
 }
 
 #footer-boilerplate {
@@ -365,8 +366,7 @@ footer {
   text-align: right;
 }
 
-footer h2 { margin-bottom: 0; }
-footer ul { margin-top: 0; }
+/*footer ul { margin-top: 0; }*/
 
 @media not all and (display-mode: browser) {
   #install-prompt {

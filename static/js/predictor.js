@@ -478,8 +478,9 @@ window.addEventListener("load", () => {
     const resources = document.getElementById("resources");
 
     let pwaLi = document.createElement("li");
-    pwaLi.innerHTML += "Get the free app on any device by opening the browser menu and selecting 'Install Fresh Legs Monday' <br>";
+    pwaLi.innerHTML += "Get the free app on any device by opening the browser menu and selecting 'Install Fresh Legs Monday' or visiting an app store:<br>";
     pwaLi.id = "install-prompt";
+    pwaLi.className = "resource";
 
     let playStoreLink = document.createElement("a");
     playStoreLink.href = "https://play.google.com/store/apps/details?id=com.freshlegsmonday.twa";
