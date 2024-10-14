@@ -13,4 +13,6 @@ The Progressive Web App is installable from [FreshLegsMonday](https://freshlegsm
 
 ![Lighthouse screenshot](doc/Archive/Lighthouse%20desktop%20report%202024-10-10.png)
 
+![Mobile screenshot](static/img/AppleAppStore/iPhone%206%2E5%22%20km.png)
+
 [Documentation](doc)
