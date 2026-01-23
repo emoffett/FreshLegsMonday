@@ -6,7 +6,7 @@ const test = base.extend({
 export { test };
 
 test.describe('Generate screenshots using Playwright', () => {
-  const url = 'http://localhost:63342/crtools/static/';
+  const url = 'http://localhost:63342/FreshLegsMonday/static/';
   const now = new Date()
   const time = now.getTime();
   const expiry = time/1000 + 60;
@@ -20,6 +20,10 @@ test.describe('Generate screenshots using Playwright', () => {
     await context.addCookies([appPlatformCookie]);
     await page.goto(url);
     await page.screenshot({ path: '../static/img/' + store + '/' + name + '.png' });
+    if (name !== 'feature-graphic') {
+      await scrollToBottom(page);
+      await page.screenshot({path: '../static/img/' + store + '/' + name + ' lower.png'});
+    }
   })
 
   test('Device screenshot miles', async ({ page, context, store }) => {
@@ -32,7 +36,19 @@ test.describe('Generate screenshots using Playwright', () => {
       await milesButton.evaluate((node) => { node.click() });
       await page.waitForTimeout(500);
       await page.screenshot({ path: '../static/img/' + store + '/' + name + '.png' });
+      await scrollToBottom(page);
+      await page.screenshot({ path: '../static/img/' + store + '/' + name + ' lower.png' });
     }
   })
 
 })
+
+async function scrollToBottom(page) {
+    await page.evaluate(async () => {
+      for (let i = 0;  i < 10 && window.scrollY * i < window.document.documentElement.scrollHeight; i++) {
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        window.scrollTo(0, window.scrollY + window.document.documentElement.clientHeight);
+        await delay(100);
+      }
+    });
+}

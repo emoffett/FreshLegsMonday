@@ -19,4 +19,4 @@ dist
 /twa/gradlew.bat
 /twa/manifest-checksum.txt
 /twa/settings.gradle
-
+/ios/

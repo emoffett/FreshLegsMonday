@@ -20,11 +20,12 @@ To create the apps, see [appStores.md](appStores)
 
 ### Description
 Fresh Legs Monday allows you to predict your Marathon finish time using the distance and pace that you typically run each week. You can use this app to guide your weekly training to achieve your target Marathon time.
+There is also a Marathon splits table to guide your pacing on race day!
 
 ### Promotional text
 *<=170 char for Apple App Store*
 
-Marathon time predictor
+Marathon time predictor and splits table
 
 ### Keywords
 Marathon Running

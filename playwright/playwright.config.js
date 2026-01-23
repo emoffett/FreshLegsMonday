@@ -19,13 +19,13 @@ module.exports = defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:63342/crtools/static/',
+    baseURL: 'http://localhost:63342/FreshLegsMonday/static/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
 
-  /* Configure projects for major browsers */
+  /* Configure projects for major browsers - more devices: https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json */
   projects: [
     {
       name: 'feature-graphic',
@@ -76,14 +76,6 @@ module.exports = defineConfig({
       use: {
         ...devices['iPhone 14 Pro Max'],
         viewport: { width: 430, height: 932 },
-        store: 'AppleAppStore',
-      },
-    },
-    {
-      name: 'iPhone 6.5"',
-      use: {
-        ...devices['iPhone 14 Plus'],
-        viewport: { width: 428, height: 926 },
         store: 'AppleAppStore',
       },
     },
